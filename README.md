@@ -99,6 +99,6 @@ docker run -p 8080:80 -it binwiederhier/ntfy serve
 ## 🧰 Other notes
 
 - **Reset everything**: stop the server and delete `cando.db`.
-- **Port**: `PORT=8080 npm start`.
+- **Port / network**: `PORT=8080 npm start`. The server listens on all interfaces (`0.0.0.0`) and prints your LAN address(es) at startup, so any device on the same Wi-Fi can open it. Use `HOST=127.0.0.1 npm start` to limit it to this computer. If other devices can't connect, allow the port in your firewall (e.g. `sudo ufw allow 3000/tcp`).
 - **Parent PIN** is stored in the local database in plain text – CanDo! is designed as a home-network family tool, not an internet-facing service. Don’t expose it publicly without adding HTTPS and real authentication.
 - Child check-in after every mission: *“Is the room clean enough for now?”* → Yes / No (one more small round) / Send a photo / I need help.

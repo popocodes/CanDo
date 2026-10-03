@@ -10,6 +10,7 @@ const ntfy = require('./ntfy');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0'; // set HOST=127.0.0.1 to restrict to this computer
 
 app.use(cors());
 app.use(express.json({ limit: '15mb' }));
@@ -812,8 +813,14 @@ app.use((req, res) => {
 
 // Initialize database and start listening
 initDb().then(() => {
-  app.listen(PORT, () => {
+  // Listen on all network interfaces so phones/tablets on the same Wi-Fi can connect
+  app.listen(PORT, HOST, () => {
     console.log(`✨ CanDo! Server running on http://localhost:${PORT}`);
+    const urls = lanUrls();
+    if (HOST === '0.0.0.0' && urls.length) {
+      console.log('📱 Open from other devices on this network:');
+      urls.forEach(u => console.log(`   ${u}`));
+    }
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);
