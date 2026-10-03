@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+cando.db
+cando.db-*
+public/uploads/*
+!public/uploads/.gitkeep
+~$*

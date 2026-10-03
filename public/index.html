@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CanDo! — ADHD-Friendly Visual Chore Companion</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div id="app">
+    <!-- Top Global App Header -->
+    <header class="app-header" id="appHeader">
+      <div class="brand-badge" id="brandLogoBadge" title="CanDo! Home">
+        <img src="assets/logo.png" alt="CanDo! Logo" class="brand-logo">
+        <span class="brand-title">CanDo!</span>
+      </div>
+
+      <div class="header-right">
+        <!-- Live Star Counter for current kid -->
+        <div class="star-counter" id="headerStarCounter" style="display: none;">
+          <span id="headerStarsText">0 ⭐</span>
+        </div>
+
+        <!-- Switch Kid Button -->
+        <button class="icon-btn" id="headerExplorerBtn" style="display: none;" title="Switch Explorer">
+          <span>👥</span> <span class="hide-mobile">Cadets</span>
+        </button>
+
+        <!-- Sound Toggle -->
+        <button class="icon-btn" id="soundToggleBtn" title="Toggle Sound">
+          <span id="soundToggleIcon">🔊</span>
+        </button>
+
+        <!-- Parent Command Center Lock -->
+        <button class="icon-btn btn-parent" id="parentLockBtn" title="Parent Command Center">
+          <span>🔒</span> <span>Parent</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================
+         SCREEN 1: GATEWAY (WHO IS EXPLORING TODAY?)
+         ======================================================== -->
+    <section class="screen active" id="screen-gateway">
+      <div class="gateway-hero">
+        <img src="assets/logo.png" alt="CanDo! Mission Control" class="gateway-logo">
+        <h1 class="gateway-title">Who is exploring today?</h1>
+        <p class="gateway-subtitle">Tap your cadet badge to jump into your Space Base!</p>
+      </div>
+
+      <div id="gatewayEmpty" style="display:none; text-align:center; margin-bottom:20px;">
+        <p style="color: var(--text-muted); margin-bottom: 12px;">No explorers yet — let's set up CanDo!</p>
+        <a class="btn-start-chore" href="/setup.html" style="text-decoration:none; display:inline-block;">🚀 Start setup</a>
+      </div>
+      <div class="kid-grid" id="gatewayKidsGrid">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 2: THE SPACE BASE (KID'S QUEST HUB)
+         ======================================================== -->
+    <section class="screen" id="screen-base">
+      <div class="base-layout">
+        
+        <!-- Header & Space Base Room Customizer -->
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h2 id="baseKidName" style="font-size: 26px; font-weight: 800; color: #fff;">Space Base</h2>
+          <button class="icon-btn" id="customizeRoomBtn" style="background: rgba(107, 91, 255, 0.2); border-color: var(--cosmic-purple-bright);">
+            <span>🏮</span> <span>Decorate Base</span>
+          </button>
+        </div>
+
+        <!-- 2D Space Base Room with Decor -->
+        <div class="space-base-room">
+          <div class="room-stars">✨ ✦ ⋆ ✧ ⋆</div>
+          <div class="room-window">🪐</div>
+          <div class="room-decorations-container" id="roomDecorations">
+            <!-- Injected dynamically: Popo and unlocked space decor items -->
+          </div>
+        </div>
+
+        <!-- ADHD Low Battery Mode Banner -->
+        <div class="low-battery-toggle-bar">
+          <div class="low-battery-info">
+            <span class="low-battery-icon">🔋</span>
+            <div>
+              <div class="low-battery-title">Low Battery Mode</div>
+              <div class="low-battery-desc">Tired or sensory overwhelmed? Swaps missions to 1-2 "Good Enough" micro-tasks!</div>
+            </div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="lowBatteryToggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <!-- Quick Hub Action Strip: Roulette, Rewards, Cosmic Arcade -->
+        <div class="hub-action-strip">
+          <button class="action-card-btn" id="wheelHubBtn">
+            <span class="emoji-icon">🎡</span>
+            <span class="btn-text">Mission Wheel</span>
+            <span class="btn-sub">Beat task paralysis!</span>
+          </button>
+
+          <button class="action-card-btn" id="rewardsHubBtn">
+            <span class="emoji-icon">🎁</span>
+            <span class="btn-text">Star Store</span>
+            <span class="btn-sub">Redeem real rewards</span>
+          </button>
+
+          <button class="action-card-btn arcade-btn arcade-locked" id="arcadeHubBtn">
+            <span class="tape-badge" id="arcadeTapeBadge">FINISH TASKS</span>
+            <span class="emoji-icon">🕹️</span>
+            <span class="btn-text">Cosmic Arcade</span>
+            <span class="btn-sub">Bubble Pop relaxation</span>
+          </button>
+        </div>
+
+        <!-- Hologram Task Board -->
+        <div>
+          <div class="task-board-header">
+            <h3 class="section-title"><span>📋</span> Today's Quests</h3>
+            <span style="font-size: 14px; color: var(--text-muted);">Earn stars for each approved mission</span>
+          </div>
+
+          <div class="chores-list" id="taskBoardList">
+            <!-- Injected dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 3: ACTIVE CHORE MODE (MICRO-STEP FLOW)
+         ======================================================== -->
+    <section class="screen" id="screen-chore">
+      <div class="chore-flow-container">
+        
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <h2 id="activeChoreTitle" style="font-size: 22px; font-weight: 700;">Active Mission</h2>
+          <button class="icon-btn" onclick="showScreen('base')">✕ Pause</button>
+        </div>
+
+        <!-- ADHD Spaceship Visual Progress Bar (NO TICKING NUMBERS!) -->
+        <div class="spaceship-progress-bar">
+          <div class="progress-orbit">
+            <div class="orbit-line"></div>
+            <div id="progressOrbitNodes" style="display: flex; width: 100%; justify-content: space-between; position: relative; z-index: 2;">
+              <!-- Step dots injected dynamically -->
+            </div>
+            <!-- Animated spaceship flying toward base -->
+            <div class="moving-spaceship" id="movingSpaceship">🚀</div>
+          </div>
+        </div>
+
+        <!-- Single Chunked Micro-Step Card -->
+        <div class="step-card">
+          <span class="step-header-tag" id="stepTag">Step 1 of 5</span>
+
+          <!-- Big, clean instruction text -->
+          <h1 class="step-instruction" id="stepInstruction">Put your dirty clothes in the basket.</h1>
+
+          <!-- Popo Body Double Guide -->
+          <div class="popo-guide-box">
+            <img src="assets/popo_mascot.png" id="popoPoseImg" alt="Popo Guide">
+            <div class="popo-speech-bubble" id="popoHintText">
+              Popo carries the clothes to the basket with you!
+            </div>
+          </div>
+
+          <!-- Safety Note (if any) -->
+          <div class="safety-banner" id="choreSafetyBanner" style="display: none;"></div>
+
+          <!-- Tactile Control Buttons -->
+          <div class="step-actions">
+            <!-- Huge Primary Completion Button -->
+            <button class="primary-step-btn" id="nextStepBtn">
+              Done! Next Step ➡️ ⭐
+            </button>
+
+            <!-- Auxiliary Controls -->
+            <div class="secondary-actions">
+              <button class="aux-btn" id="prevStepBtn" style="visibility: hidden;">
+                <span>⬅️</span> Back
+              </button>
+              <button class="aux-btn show-me" id="showMeArBtn">
+                <span>🔍</span> Show Me! (AR)
+              </button>
+              <button class="aux-btn" id="readAloudBtn">
+                <span>🔊</span> Listen
+              </button>
+            </div>
+            <div class="secondary-actions">
+              <button class="aux-btn" id="helpBtn" style="border-color: var(--cosmic-pink); color: #ffb1c3;">
+                <span>🆘</span> I need help
+              </button>
+              <div class="collected-stars" id="collectedStars">⭐ 0 collected</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 4: 2D AR "MAGIC LENS" MODAL
+         ======================================================== -->
+    <div class="ar-modal" id="arModal">
+      <div class="ar-viewport">
+        <video class="ar-video" id="arVideo" playsinline autoplay muted></video>
+        
+        <div class="ar-hologram-overlay">
+          <div class="ar-scanner-line"></div>
+          <div class="ar-crosshairs"></div>
+
+          <div class="ar-popo-guide">
+            <img src="assets/popo_idea.png" alt="Popo AR">
+            <div class="ar-popo-text" id="arStepText">Spot where your item belongs and put it away!</div>
+          </div>
+        </div>
+
+        <button class="ar-close-btn" id="arCloseBtn">✕</button>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCREEN 5: PROOF PHOTO SHUTTER & CELEBRATION
+         ======================================================== -->
+    <section class="screen" id="screen-proof">
+      <div class="proof-container">
+        <h2 style="font-size: 26px; font-weight: 800; color: var(--star-gold); margin-bottom: 6px;">Mission Accomplished! 📸</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Scan the room for Mission Control so parents can verify!</p>
+
+        <div class="camera-preview-box">
+          <video id="proofVideo" playsinline autoplay muted></video>
+          <div class="camera-target-reticle"></div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <button class="snap-shutter-btn" id="snapProofBtn" title="Snap Photo Proof">📸</button>
+        </div>
+
+        <div class="secondary-actions" style="max-width: 420px; margin: 0 auto;">
+          <label class="aux-btn" style="cursor:pointer;">
+            <span>🖼️</span> Choose a photo
+            <input type="file" id="proofFile" accept="image/*" capture="environment" style="display:none;">
+          </label>
+          <button class="aux-btn" onclick="showScreen('chore')">Back to Mission</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- HTML5 Confetti & Popo Celebration Modal -->
+    <div class="celebration-modal" id="celebrationModal">
+      <canvas id="confettiCanvas"></canvas>
+      <div class="celebrate-card">
+        <img src="assets/popo_celebrate.png" class="celebrate-popo" alt="Popo Celebrates!">
+        <h2 class="celebrate-title">MISSION SENT! 🌟</h2>
+        <p class="celebrate-desc">Popo sent your mission photo to Parent Command Control for final star verification!</p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button class="primary-step-btn" style="font-size: 18px; padding: 14px;" onclick="finishCelebration(true)">
+            🕹️ Play Cosmic Bubble Pop While Waiting!
+          </button>
+          <button class="aux-btn" onclick="finishCelebration(false)">
+            Back to Space Base 🚀
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         COSMIC ARCADE MINIGAME (SOOTHING EXIT STRATEGY)
+         ======================================================== -->
+    <section class="screen" id="screen-arcade">
+      <div style="max-width: 750px; margin: 0 auto; width: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+          <div>
+            <h2 style="font-size: 26px; font-weight: 800; color: var(--alien-green);">Cosmic Bubble Pop 🫧</h2>
+            <div style="color: var(--text-muted); font-size: 14px;">Pop relaxing cosmic bubbles • Zero pressure • Pure calm</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="font-size: 18px; font-weight: 700; color: var(--star-gold);">
+              Popped: <span id="arcadePopCount">0</span>
+            </div>
+            <button class="icon-btn" id="exitArcadeBtn">✕ Exit</button>
+          </div>
+        </div>
+
+        <div style="border-radius: var(--radius-lg); overflow: hidden; border: 2px solid var(--border-cosmic); box-shadow: 0 0 30px rgba(0,0,0,0.5);">
+          <canvas id="bubbleCanvas" style="display: block; width: 100%; cursor: pointer;"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SCREEN 6: PARENT COMMAND CENTER (PIN PROTECTED)
+         ======================================================== -->
+    <section class="screen" id="screen-parent">
+      <div class="parent-dashboard">
+        
+        <!-- Header Bar -->
+        <div class="parent-header-bar">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="assets/popo_clipboard.png" style="width: 44px; height: 44px; object-fit: contain;" alt="Parent Control">
+            <div>
+              <h2 style="font-size: 20px; font-weight: 800; color: #fff;">Parent Command Center</h2>
+              <div style="font-size: 13px; color: var(--text-muted);">Manage chores, rewards, & real-time ADHD logs</div>
+            </div>
+          </div>
+          <button class="icon-btn" onclick="showScreen('gateway')">Exit Control ✕</button>
+        </div>
+
+        <!-- Master Blueprint Tabs -->
+        <div class="parent-tabs">
+          <button class="parent-tab active" data-tab="inbox">
+            <span>📥</span> Approvals <span class="tab-badge" id="inboxBadge">0</span>
+          </button>
+          <button class="parent-tab" data-tab="assigner">
+            <span>📋</span> Task Assigner
+          </button>
+          <button class="parent-tab" data-tab="rewards">
+            <span>🎁</span> Reward Maker
+          </button>
+          <button class="parent-tab" data-tab="alerts">
+            <span>🚨</span> Activity & Distraction Log
+          </button>
+          <button class="parent-tab" data-tab="notify">
+            <span>🔔</span> Notifications
+          </button>
+          <button class="parent-tab" data-tab="settings">
+            <span>⚙️</span> Cadets & PIN
+          </button>
+        </div>
+
+        <div class="parent-tab-content">
+          
+          <!-- TAB 1: INBOX (APPROVALS) -->
+          <div class="tab-pane active" id="tab-inbox">
+            <div class="stats-grid" id="statsGrid"></div>
+            <h3 style="font-size: 20px; margin-bottom: 6px;">Photo Proof Submissions</h3>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">Review cadet proof photos to award earned stars!</p>
+            <div class="inbox-list" id="parentInboxList"></div>
+          </div>
+
+          <!-- TAB 2: TASK ASSIGNER -->
+          <div class="tab-pane" id="tab-assigner">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <h3 style="font-size: 20px;">Built-in 5-Step Room Templates</h3>
+                <p style="color: var(--text-muted); font-size: 14px;">Pre-chunked ADHD-friendly routines for all 10 household areas</p>
+              </div>
+            </div>
+            <div class="template-grid" id="templatesAssignGrid"></div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Create a custom mission</h3>
+            <form id="customChoreForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 10px; background: rgba(255,255,255,0.03); padding: 18px; border-radius: 14px;">
+              <div class="form-group"><label class="form-label">Mission title</label>
+                <input id="ccTitle" class="form-input" placeholder="e.g. Feed the cat" required maxlength="60"></div>
+              <div class="form-group"><label class="form-label">Place</label>
+                <input id="ccRoom" class="form-input" placeholder="e.g. Kitchen" maxlength="40"></div>
+              <div class="form-group"><label class="form-label">For</label>
+                <select id="ccKid" class="form-select"></select></div>
+              <div class="form-group"><label class="form-label">Stars</label>
+                <input id="ccStars" type="number" class="form-input" value="10" min="1" max="100"></div>
+              <div class="form-group" style="grid-column: 1 / -1;"><label class="form-label">Steps — one per line (3–7 works best)</label>
+                <textarea id="ccSteps" class="form-input" rows="5" placeholder="Get the cat food&#10;Fill the bowl&#10;Put the food away" required></textarea></div>
+              <div style="grid-column: 1 / -1;"><button type="submit" class="btn-start-chore" style="padding: 10px 24px;">Assign custom mission 🚀</button></div>
+            </form>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Active Assigned Missions</h3>
+            <div id="activeParentChoresList"></div>
+          </div>
+
+          <!-- TAB 3: REWARD MAKER -->
+          <div class="tab-pane" id="tab-rewards">
+            <h3 style="font-size: 20px; margin-bottom: 16px;">Create Real-World Reward</h3>
+            <form id="rewardMakerForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 18px; border-radius: 14px;">
+              <div class="form-group">
+                <label class="form-label">Reward Title</label>
+                <input type="text" id="newRewardTitle" class="form-input" placeholder="e.g. 45 Mins Video Game Time" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Icon Emoji</label>
+                <input type="text" id="newRewardIcon" class="form-input" value="🎮" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Star Cost</label>
+                <input type="number" id="newRewardCost" class="form-input" value="25" min="5" required>
+              </div>
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label">Description (Optional)</label>
+                <input type="text" id="newRewardDesc" class="form-input" placeholder="Details about this reward">
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <button type="submit" class="btn-start-chore" style="padding: 10px 24px;">Add to Reward Shop 🎁</button>
+              </div>
+            </form>
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Current rewards</h3>
+            <div id="parentRewardsList" style="margin-bottom: 30px;"></div>
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Recent Reward Redemptions</h3>
+            <div id="redemptionsList"></div>
+          </div>
+
+          <!-- TAB 4: DISTRACTION & MISSION ALERTS FEED -->
+          <div class="tab-pane" id="tab-alerts">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <div>
+                <h3 style="font-size: 20px;">Real-Time Activity & Distraction Log</h3>
+                <p style="color: var(--text-muted); font-size: 14px;">Live feed powered by the SoftLock Distraction Monitor & Mission Shutter</p>
+              </div>
+              <button class="icon-btn" onclick="clearAlertsLog()">Clear Log</button>
+            </div>
+            <div class="alerts-feed" id="alertsFeedList"></div>
+          </div>
+
+          <!-- TAB: NTFY NOTIFICATIONS -->
+          <div class="tab-pane" id="tab-notify">
+            <h3 style="font-size: 20px; margin-bottom: 6px;">Phone notifications with ntfy</h3>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 14px;">
+              Install the <b>ntfy</b> app, subscribe to your topic, then save &amp; send a test.
+              Full walkthrough: <a href="/setup.html" style="color: var(--star-gold);">Setup page</a>.
+            </p>
+            <form id="ntfyForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; background: rgba(255,255,255,0.03); padding: 18px; border-radius: 14px;">
+              <label class="form-label" style="grid-column: 1 / -1; display:flex; align-items:center; gap:8px; font-size:16px;">
+                <input type="checkbox" id="nfEnabled"> Enable ntfy notifications</label>
+              <div class="form-group"><label class="form-label">Server</label>
+                <input id="nfServer" class="form-input" placeholder="https://ntfy.sh"></div>
+              <div class="form-group"><label class="form-label">Topic</label>
+                <input id="nfTopic" class="form-input" placeholder="cando-family-abc123"></div>
+              <div class="form-group"><label class="form-label">Token / user:password (optional)</label>
+                <input id="nfToken" type="password" class="form-input" autocomplete="off" placeholder="blank = keep saved"></div>
+              <div class="form-group"><label class="form-label">Tap-to-open link</label>
+                <input id="nfClick" class="form-input" placeholder="http://192.168.1.20:3000"></div>
+              <div class="form-group" style="grid-column: 1 / -1;"><label class="form-label">Notify me about</label>
+                <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                  <label><input type="checkbox" class="nfEvt" value="completion"> 📸 Mission finished</label>
+                  <label><input type="checkbox" class="nfEvt" value="distraction"> 🚨 Left the app</label>
+                  <label><input type="checkbox" class="nfEvt" value="reward"> 🎁 Reward claimed</label>
+                  <label><input type="checkbox" class="nfEvt" value="help"> 🆘 Needs help</label>
+                </div></div>
+              <div style="grid-column: 1 / -1; display:flex; gap:10px; flex-wrap:wrap;">
+                <button type="submit" class="btn-start-chore" style="padding: 10px 24px;">Save</button>
+                <button type="button" class="aux-btn" id="nfTest" style="flex:none; padding: 10px 18px;">🔔 Send test</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- TAB 5: CADETS & PIN SETTINGS -->
+          <div class="tab-pane" id="tab-settings">
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Cadet Profiles</h3>
+            <div id="parentKidsList" style="margin-bottom: 24px;"></div>
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Add New Explorer Cadet</h3>
+            <form id="addKidForm" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 30px; background: rgba(255,255,255,0.03); padding: 18px; border-radius: 14px;">
+              <div class="form-group">
+                <label class="form-label">Cadet Name</label>
+                <input type="text" id="newKidName" class="form-input" placeholder="e.g. Leo" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Avatar</label>
+                <select id="newKidAvatar" class="form-select">
+                  <option value="assets/popo_mascot.png">Popo Astronaut</option>
+                  <option value="assets/popo_star.png">Popo Star Master</option>
+                  <option value="assets/popo_backpack.png">Popo Explorer</option>
+                  <option value="assets/popo_celebrate.png">Popo Cheerful</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Theme Color</label>
+                <input type="color" id="newKidColor" class="form-input" value="#70459e" style="height: 44px; padding: 2px;">
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <button type="submit" class="btn-start-chore" style="padding: 10px 24px;">Create Cadet 🚀</button>
+              </div>
+            </form>
+
+            <h3 style="font-size: 20px; margin-bottom: 12px;">Change Parent PIN</h3>
+            <form id="updatePinForm" style="display: flex; gap: 12px; align-items: flex-end; max-width: 440px;">
+              <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                <label class="form-label">Current PIN</label>
+                <input type="password" id="currentPinInput" class="form-input" maxlength="4" placeholder="1234" required>
+              </div>
+              <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                <label class="form-label">New PIN</label>
+                <input type="password" id="newPinInput" class="form-input" maxlength="4" placeholder="e.g. 5678" required>
+              </div>
+              <button type="submit" class="btn-approve" style="height: 44px;">Update PIN</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MODALS
+         ======================================================== -->
+    
+    <!-- PIN Numpad Modal -->
+    <div class="modal-overlay" id="pinModal">
+      <div class="modal-window">
+        <div class="modal-header">
+          <div class="modal-title">Parent PIN Required</div>
+          <button class="modal-close-btn" onclick="closeModal('pinModal')">✕</button>
+        </div>
+
+        <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+          Enter 4-digit PIN to access Parent Command Center (Default: 1234)
+        </p>
+
+        <div class="pin-display">
+          <div class="pin-dot" id="pinDot1"></div>
+          <div class="pin-dot" id="pinDot2"></div>
+          <div class="pin-dot" id="pinDot3"></div>
+          <div class="pin-dot" id="pinDot4"></div>
+        </div>
+
+        <div class="numpad-grid">
+          <button class="numpad-btn" onclick="handleNumpadPress('1')">1</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('2')">2</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('3')">3</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('4')">4</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('5')">5</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('6')">6</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('7')">7</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('8')">8</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('9')">9</button>
+          <button class="numpad-btn" style="font-size: 16px;" onclick="closeModal('pinModal')">Cancel</button>
+          <button class="numpad-btn" onclick="handleNumpadPress('0')">0</button>
+          <button class="numpad-btn" onclick="handleNumpadBackspace()">⌫</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roulette Wheel Modal (Decide for me!) -->
+    <div class="modal-overlay" id="rouletteModal">
+      <div class="modal-window" style="max-width: 400px; text-align: center;">
+        <div class="modal-header">
+          <div class="modal-title">Mission Roulette 🎡</div>
+          <button class="modal-close-btn" onclick="closeModal('rouletteModal')">✕</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
+          Can't decide where to start? Let the cosmic wheel choose your mission!
+        </p>
+
+        <div class="roulette-box">
+          <div class="wheel-container">
+            <div class="wheel-pointer"></div>
+            <canvas id="rouletteCanvas" width="300" height="300"></canvas>
+            <div class="wheel-center-cap">🚀</div>
+          </div>
+
+          <button class="primary-step-btn" id="spinWheelBtn" style="font-size: 20px; width: 100%;">
+            SPIN THE WHEEL! 💫
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Star Rewards Shop Modal -->
+    <div class="modal-overlay" id="rewardsShopModal">
+      <div class="modal-window" style="max-width: 520px;">
+        <div class="modal-header">
+          <div class="modal-title">Star Rewards Store 🎁</div>
+          <button class="modal-close-btn" onclick="closeModal('rewardsShopModal')">✕</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 18px;">
+          Redeem your hard-earned stars for real-world privileges approved by parents!
+        </p>
+        <div id="rewardsShopList" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+    </div>
+
+    <!-- Room Customizer Modal -->
+    <div class="modal-overlay" id="roomCustomizerModal">
+      <div class="modal-window" style="max-width: 520px;">
+        <div class="modal-header">
+          <div class="modal-title">Customize Space Base 🏮</div>
+          <button class="modal-close-btn" onclick="closeModal('roomCustomizerModal')">✕</button>
+        </div>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 18px;">
+          Spend stars to unlock cool cosmic items for your room!
+        </p>
+        <div id="roomCustomizerList" style="max-height: 400px; overflow-y: auto;"></div>
+      </div>
+    </div>
+
+    <!-- "Is the room clean enough for now?" check-in -->
+    <div class="modal-overlay" id="checkinModal">
+      <div class="modal-window" style="text-align:center;">
+        <img src="assets/popo_clipboard.png" alt="Popo" style="width:110px; margin-bottom:8px;">
+        <div class="modal-title" style="margin-bottom:6px;">Is the room clean enough for now?</div>
+        <p id="checkinNote" style="color: var(--text-muted); font-size: 15px; min-height: 22px; margin-bottom: 16px;"></p>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+          <button class="primary-step-btn" style="font-size:20px; padding:14px;" id="checkinYes">✅ Yes</button>
+          <button class="aux-btn" style="font-size:18px; padding:14px;" id="checkinNo">🔁 No</button>
+          <button class="aux-btn" style="font-size:16px;" id="checkinPhoto">📸 Send a photo</button>
+          <button class="aux-btn" style="font-size:16px; border-color: var(--cosmic-pink);" id="checkinHelp">🆘 I need help</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-stack" id="toastStack"></div>
+
+    <!-- SoftLock Distraction Toast Notification -->
+    <div class="distraction-toast" id="distractionToast">
+      <img src="assets/popo_mascot.png" alt="Popo">
+      <div>
+        <div style="font-weight: 800; font-size: 17px; color: var(--star-gold);">Welcome back, Cadet! 🚀</div>
+        <div style="font-size: 14px; color: #fff;">Popo kept your mission spot warm! Ready to finish up?</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/sounds.js"></script>
+  <script src="js/bubbleArcade.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
