@@ -1,6 +1,6 @@
 # CanDo! — Simple Technical Details
 
-This page explains how CanDo! works in plain language.
+This page explains how CanDo! works in plain language, including what runs the server and what technologies are used.
 
 ## What is CanDo!?
 
@@ -28,9 +28,80 @@ The app includes:
 7. The parent reviews the photo and approves the mission.
 8. The child receives stars and can exchange them for family-approved rewards.
 
+## What runs the app?
+
+CanDo! uses a **Node.js server**.
+
+### Node.js
+
+**Node.js** is the program that allows JavaScript to run outside a web browser. In CanDo!, Node.js runs the background server on the computer.
+
+The Node.js server is started by this file:
+
+```text
+server/index.js
+```
+
+### Express
+
+The server uses **Express**, a Node.js tool that makes it easier to:
+
+- Start the website
+- Create web addresses for app features
+- Receive information from the browser
+- Send information back to the browser
+- Serve the HTML, CSS, JavaScript, and image files
+
+For example, when the browser asks for a list of chores, the Express server receives the request and gets the information from the database.
+
+### npm
+
+**npm** is the package manager used by Node.js. It downloads and manages the extra tools CanDo! needs.
+
+The required tools are listed in:
+
+```text
+package.json
+```
+
+The main packages are:
+
+| Package | What it does |
+|---|---|
+| `express` | Runs the web server and API routes |
+| `cors` | Allows the browser and server to communicate during development |
+| `multer` | Receives uploaded proof photos |
+| `sqlite3` | Lets the server save and read information in SQLite |
+
+Install these packages with:
+
+```bash
+npm install
+```
+
+Start the server with:
+
+```bash
+npm start
+```
+
+The `npm start` command runs:
+
+```bash
+node server/index.js
+```
+
 ## Where the app runs
 
 CanDo! runs as a local website. This means the app is started on a computer, and family members open it in a web browser.
+
+The server normally uses port **3000**. A port is like a numbered doorway that lets a browser connect to the app.
+
+On the same computer, open:
+
+```text
+http://localhost:3000
+```
 
 A phone or tablet on the same Wi-Fi network can also open the app using the computer's local network address.
 
@@ -38,6 +109,12 @@ Example:
 
 ```text
 http://192.168.1.20:3000
+```
+
+To use a different port:
+
+```bash
+PORT=8080 npm start
 ```
 
 ## The server
@@ -50,20 +127,35 @@ The server is the part of the app that works in the background. It:
 - Receives uploaded proof photos
 - Sends live updates to the parent dashboard
 - Sends optional phone notifications
+- Protects parent features using the parent PIN
 
 The server is built with **Node.js** and **Express**.
 
-To start it:
-
-```bash
-npm install
-npm start
-```
-
-By default, the app opens at:
+The main server file is:
 
 ```text
-http://localhost:3000
+server/index.js
+```
+
+## How the browser and server communicate
+
+The browser and server communicate using web requests.
+
+For example:
+
+1. A child presses **Done** on a chore step.
+2. The browser sends the update to the Node.js server.
+3. The server saves the completed step in SQLite.
+4. The server sends a response back to the browser.
+5. The browser displays the next step.
+
+These server features are called **API routes**. CanDo!'s routes are located in `server/index.js` and use addresses such as:
+
+```text
+/api/kids
+/api/chores
+/api/rewards
+/api/alerts
 ```
 
 ## The website part
@@ -74,11 +166,31 @@ The part families see in the browser is built with:
 - **CSS** — colors, layout, buttons, and visual design
 - **JavaScript** — interactions, missions, sounds, camera features, and animations
 
+The main website files are inside:
+
+```text
+public/
+```
+
+Important frontend files include:
+
+```text
+public/index.html
+public/css/style.css
+public/js/app.js
+```
+
 The website is designed to work on computers, phones, and tablets.
 
 ## The database
 
 CanDo! uses a small local database called **SQLite**.
+
+The database is handled by:
+
+```text
+server/db.js
+```
 
 The database is stored in a file named:
 
@@ -110,7 +222,7 @@ The parent dashboard can receive updates without constantly refreshing the page.
 - A reward is claimed
 - A parent approves a mission
 
-This is handled by a server feature called **Server-Sent Events**, which can be thought of as a live message connection from the server to the browser.
+This is handled by **Server-Sent Events**, which is a live message connection from the server to the browser.
 
 ## Phone notifications
 
@@ -132,7 +244,11 @@ The app can use the device camera for two purposes:
 1. Showing a visual camera prompt during a chore
 2. Taking a photo that the parent can review
 
-Photos are saved on the computer running CanDo!, inside the app's upload folder.
+The server uses **Multer** to receive uploaded photos. Photos are saved on the computer running CanDo!, inside:
+
+```text
+public/uploads/
+```
 
 ## Parent access
 
@@ -147,6 +263,24 @@ The Parent Command Center is protected by a four-digit PIN. Parents can use it t
 - Change the parent PIN
 - Configure phone notifications
 
+## Basic project structure
+
+```text
+CanDo/
+├── package.json          # Node.js project settings and dependencies
+├── server/
+│   ├── index.js          # Main Node.js and Express server
+│   ├── db.js             # SQLite database setup and database functions
+│   └── ...               # Other server helpers and chore templates
+├── public/
+│   ├── index.html        # Main browser page
+│   ├── css/              # Styles and visual design
+│   ├── js/               # Browser-side JavaScript
+│   ├── assets/           # Images and other visual files
+│   └── uploads/          # Saved proof photos
+└── cando.db              # Local database created when the app runs
+```
+
 ## Important safety note
 
 CanDo! is designed for use at home on a trusted local network. It is not currently designed to be exposed directly to the public internet.
@@ -157,11 +291,15 @@ The parent PIN is stored in the local database, and the app does not include ful
 
 | Area | Technology | Plain-language meaning |
 |---|---|---|
-| Website server | Node.js and Express | Runs the app and handles requests |
+| Server runtime | Node.js | Runs JavaScript on the computer |
+| Server framework | Express | Helps Node.js run the website and API routes |
+| Package manager | npm | Installs the tools the app needs |
+| Project settings | `package.json` | Lists commands and dependencies |
 | Web pages | HTML, CSS, JavaScript | Creates the screens and interactions |
-| Local storage | SQLite | Saves family and mission information |
+| Local storage | SQLite and `sqlite3` | Saves family and mission information |
+| Photo uploads | Multer | Receives photos from the browser |
 | Live updates | Server-Sent Events | Sends updates to the parent screen immediately |
-| Photos | Browser camera and file upload | Takes and saves proof photos |
+| Camera | Browser Camera API | Lets the app use the device camera |
 | Notifications | ntfy | Sends optional messages to a parent's phone |
 
 ## Basic reset
