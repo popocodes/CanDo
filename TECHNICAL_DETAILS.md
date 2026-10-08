@@ -1,6 +1,6 @@
 # CanDo! — Simple Technical Details
 
-This page explains how CanDo! works in plain language, including what runs the server and what technologies are used.
+This page explains how CanDo! works in plain language, including what runs the server, how the camera-based AR feature works, and how the app can become an Android app.
 
 ## What is CanDo!?
 
@@ -93,7 +93,7 @@ node server/index.js
 
 ## Where the app runs
 
-CanDo! runs as a local website. This means the app is started on a computer, and family members open it in a web browser.
+CanDo! currently runs as a local website. This means the app is started on a computer, and family members open it in a web browser.
 
 The server normally uses port **3000**. A port is like a numbered doorway that lets a browser connect to the app.
 
@@ -181,6 +181,125 @@ public/js/app.js
 ```
 
 The website is designed to work on computers, phones, and tablets.
+
+## How the AR feature works
+
+CanDo! currently uses **2D camera-assisted visual prompting**. This is sometimes called a lightweight AR experience, but it is not yet full 3D AR.
+
+When the child presses **Show Me! (AR)**:
+
+1. The browser asks for permission to use the device camera.
+2. The camera video is displayed on the screen.
+3. CanDo! places Popo, instructions, crosshairs, and a scanning animation on top of the video.
+4. The child looks through the camera while following the instruction.
+5. The child closes the camera view and continues the chore.
+
+The camera view and overlay are defined in the frontend, especially in:
+
+```text
+public/index.html
+public/js/app.js
+public/css/style.css
+```
+
+The current feature does **not** automatically recognize objects, measure the room, or place 3D objects into the real world. It is a camera view with helpful 2D graphics layered on top.
+
+### What would be needed for true AR?
+
+A future full AR version could use Android ARCore or a web technology such as WebXR. That would allow features such as:
+
+- Detecting walls and floors
+- Recognizing surfaces
+- Anchoring Popo or arrows to a real location
+- Placing 3D guidance objects in the room
+- Tracking the phone's movement in 3D
+
+True AR would require additional testing, device support checks, 3D assets, and a more advanced camera/AR implementation.
+
+## Android app plan
+
+CanDo! can become an Android app without rewriting the whole project immediately.
+
+### Recommended approach: Capacitor
+
+The easiest approach for the current web-based project is to package the existing HTML, CSS, and JavaScript inside an Android shell using **Capacitor**.
+
+With Capacitor:
+
+- The existing frontend can be reused
+- Android Studio can build an Android APK or App Bundle
+- The app can request camera permissions
+- The app can later use native Android features through plugins
+- Web updates can remain separate from the Android wrapper
+
+A typical future structure would be:
+
+```text
+CanDo/
+├── public/              # Existing web app
+├── server/              # Existing Node.js backend
+├── android/             # Android project created by Capacitor
+├── capacitor.config.*   # Capacitor configuration
+└── package.json         # Web and Capacitor commands
+```
+
+### Important backend note
+
+The Android app would still need to connect to the Node.js server.
+
+During home testing, the Android app could connect to a computer on the same Wi-Fi network, for example:
+
+```text
+http://192.168.1.20:3000
+```
+
+For a public Android release, the server should normally be hosted on a secure online service using HTTPS. The Android app should not depend on a developer's personal computer being switched on.
+
+The backend and database should eventually be separated from the phone app:
+
+```text
+Android app → Secure online Node.js server → Database and uploaded photos
+```
+
+### Should the app be compiled now?
+
+Because CanDo! is still being developed, it is usually better **not to publish a final production APK yet**.
+
+Recommended workflow:
+
+1. Keep developing the web app.
+2. Test it in a browser on a computer and phone.
+3. Create an Android development build when mobile testing is useful.
+4. Use Android Studio or Capacitor to test camera permissions and screen sizes.
+5. Create a signed release build later, when the main features and data structure are stable.
+
+You can still create test Android builds during development. A test build is useful for checking:
+
+- Camera access
+- Touch controls
+- Screen layouts
+- Android back-button behavior
+- Notifications
+- Performance on real devices
+
+The important distinction is:
+
+- **Development build** — for testing and frequent updates
+- **Release build** — for publishing to users or the Google Play Store
+
+### Updating the Android app during development
+
+With a Capacitor workflow, the normal update process is:
+
+1. Change the files in `public/`.
+2. Test the website in a browser.
+3. Copy the updated web files into the Android project.
+4. Run the Android app again.
+5. Build a new test APK when needed.
+
+If the app loads its website from a secure server instead of bundling all files inside the APK, frontend updates can be made on the server without publishing a new APK every time. However, this approach requires reliable hosting, HTTPS, authentication, and careful version control.
+
+Native Android changes, such as new permissions or native plugins, still require a new Android build.
 
 ## The database
 
@@ -278,6 +397,7 @@ CanDo/
 │   ├── js/               # Browser-side JavaScript
 │   ├── assets/           # Images and other visual files
 │   └── uploads/          # Saved proof photos
+├── android/              # Future Capacitor Android project
 └── cando.db              # Local database created when the app runs
 ```
 
@@ -300,6 +420,9 @@ The parent PIN is stored in the local database, and the app does not include ful
 | Photo uploads | Multer | Receives photos from the browser |
 | Live updates | Server-Sent Events | Sends updates to the parent screen immediately |
 | Camera | Browser Camera API | Lets the app use the device camera |
+| Current AR style | 2D camera overlay | Displays guidance graphics over live camera video |
+| Future Android wrapper | Capacitor | Packages the web app as an Android app |
+| Future full AR | Android ARCore or WebXR | Supports 3D world tracking and AR objects |
 | Notifications | ntfy | Sends optional messages to a parent's phone |
 
 ## Basic reset
