@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CanDo! Setup</title>
+  <link rel="icon" type="image/png" href="/assets/applogo/logo2.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .setup-wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+    .setup-card { background: var(--cosmic-card); border: 2px solid var(--border-cosmic); border-radius: var(--radius-lg); padding: 28px; box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+    .setup-steps { display: flex; gap: 8px; margin: 18px 0 24px; }
+    .setup-steps .dot { flex: 1; height: 8px; border-radius: 99px; background: rgba(255,255,255,.12); transition: .3s; }
+    .setup-steps .dot.done { background: var(--alien-green); }
+    .setup-steps .dot.current { background: var(--star-gold); }
+    .setup-step { display: none; }
+    .setup-step.active { display: block; }
+    .setup-step h2 { font-size: 24px; margin-bottom: 6px; }
+    .setup-step .lead { color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+    .row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 160px; }
+    .help { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .help code, .lead code { background: rgba(255,255,255,.1); padding: 1px 6px; border-radius: 6px; color: var(--star-gold); font-family: ui-monospace, monospace; }
+    .avatar-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+    .avatar-opt { width: 56px; height: 56px; border-radius: 50%; border: 3px solid transparent; background: rgba(255,255,255,.08); padding: 3px; cursor: pointer; }
+    .avatar-opt img { width: 100%; height: 100%; object-fit: contain; }
+    .avatar-opt.selected { border-color: var(--star-gold); box-shadow: 0 0 12px var(--star-gold-glow); }
+    .kid-row { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,.05); padding: 10px 14px; border-radius: 12px; margin-bottom: 8px; }
+    .kid-row img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; vertical-align: middle; }
+    .nav-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 24px; }
+    .chip { display: inline-block; background: rgba(107,91,255,.2); border: 1px solid var(--cosmic-purple-bright); color: var(--cosmic-purple-light); padding: 4px 10px; border-radius: 99px; font-size: 13px; margin: 3px 4px 3px 0; cursor: pointer; }
+    .check { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 15px; }
+    .notice { padding: 12px 14px; border-radius: 12px; margin-bottom: 14px; font-size: 14px; display: none; }
+    .notice.ok { display: block; background: rgba(141,189,97,.15); border: 1px solid var(--alien-green); }
+    .notice.err { display: block; background: rgba(244,113,141,.15); border: 1px solid var(--cosmic-pink); }
+    ol.install { margin: 8px 0 14px 20px; line-height: 1.7; font-size: 15px; }
+    body { user-select: text; }
+  </style>
+</head>
+<body>
+<div class="setup-wrap">
+  <div style="text-align:center; margin: 10px 0 18px;">
+    <img src="/assets/applogo/fulllogo.svg" alt="CanDo!" style="max-width:180px;">
+  </div>
+
+  <div class="setup-card">
+    <div id="gate" style="display:none;">
+      <h2 style="margin-bottom:6px;">🔒 Parent PIN required</h2>
+      <p class="lead">CanDo! is already set up. Enter the current PIN to change settings.</p>
+      <div class="notice" id="gateMsg"></div>
+      <div class="form-group"><label class="form-label">Current PIN</label>
+        <input id="gatePin" class="form-input" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
+      <button class="btn-start-chore" id="gateBtn">Unlock settings</button>
+    </div>
+
+    <div id="wizard" style="display:none;">
+      <h1 id="wizTitle" style="font-size:28px;">Welcome to CanDo! 🚀</h1>
+      <div class="setup-steps" id="stepDots"></div>
+
+      <!-- STEP 1 -->
+      <div class="setup-step active" data-step="1">
+        <h2>1. Family &amp; parent PIN</h2>
+        <p class="lead">The PIN (4 digits) keeps kids out of the Parent Command Center.</p>
+        <div class="row">
+          <div class="form-group"><label class="form-label">Family name</label>
+            <input id="familyName" class="form-input" maxlength="40" placeholder="The Space Explorers"></div>
+          <div class="form-group"><label class="form-label" id="pinLabel">Parent PIN (4 digits)</label>
+            <input id="pin" class="form-input" type="password" inputmode="numeric" maxlength="4" placeholder="1234"></div>
+        </div>
+        <p class="help" id="pinHelp">Pick something your child won't guess.</p>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="setup-step" data-step="2">
+        <h2>2. Add your explorers</h2>
+        <p class="lead">Add each child. You can add more later in the Parent Command Center.</p>
+        <div id="kidList"></div>
+        <div class="row" style="align-items:flex-end;">
+          <div class="form-group"><label class="form-label">Name</label>
+            <input id="kidName" class="form-input" maxlength="30" placeholder="e.g. Leo"></div>
+          <div class="form-group" style="max-width:120px"><label class="form-label">Colour</label>
+            <input id="kidColor" type="color" class="form-input" value="#70459e" style="height:44px;padding:2px;"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Avatar</label>
+          <div class="avatar-picker" id="avatarPicker"></div></div>
+        <button class="aux-btn" id="addKidBtn" style="flex:none; padding:10px 18px;">➕ Add explorer</button>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="setup-step" data-step="3">
+        <h2>3. Parent notifications (ntfy)</h2>
+        <p class="lead">Get a phone alert when a child finishes a mission, leaves the app mid-chore, claims a reward or taps “I need help”. Uses <a href="https://ntfy.sh" target="_blank" rel="noopener" style="color:var(--star-gold)">ntfy</a> — free, no account needed. You can skip this and set it up later.</p>
+
+        <ol class="install">
+          <li>Install the <b>ntfy</b> app on your phone (Android / iOS) or open <code>ntfy.sh</code> in a browser.</li>
+          <li>Pick a <b>secret topic name</b> below (anyone who knows it can read the alerts — use the 🎲 button).</li>
+          <li>In the ntfy app tap <b>+</b> → subscribe to that same topic.</li>
+          <li>Press <b>Send test notification</b>.</li>
+        </ol>
+
+        <label class="check"><input type="checkbox" id="ntfyEnabled"> Enable ntfy notifications</label>
+
+        <div class="row" style="margin-top:10px;">
+          <div class="form-group"><label class="form-label">ntfy server</label>
+            <input id="ntfyServer" class="form-input" value="https://ntfy.sh" placeholder="https://ntfy.sh"></div>
+          <div class="form-group"><label class="form-label">Topic</label>
+            <div style="display:flex;gap:6px;"><input id="ntfyTopic" class="form-input" style="flex:1" placeholder="cando-family-x7k2q9">
+              <button class="icon-btn" id="randTopic" type="button" title="Generate random topic">🎲</button></div></div>
+        </div>
+        <div class="form-group"><label class="form-label">Access token or user:password (optional — self-hosted / protected topics)</label>
+          <input id="ntfyToken" class="form-input" type="password" autocomplete="off" placeholder="leave blank for ntfy.sh public topics">
+          <span class="help" id="tokenHint"></span></div>
+        <div class="form-group"><label class="form-label">Tap-to-open link (optional)</label>
+          <input id="ntfyClick" class="form-input" placeholder="http://192.168.1.20:3000">
+          <span class="help">Opens CanDo! when you tap the notification. Use an address your phone can reach: <span id="lanChips"></span></span></div>
+
+        <div class="form-group"><label class="form-label">Notify me about</label>
+          <label class="check"><input type="checkbox" class="evt" value="completion" checked> 📸 Mission finished (needs approval)</label>
+          <label class="check"><input type="checkbox" class="evt" value="distraction" checked> 🚨 Child left the app mid-chore</label>
+          <label class="check"><input type="checkbox" class="evt" value="reward" checked> 🎁 Reward claimed</label>
+          <label class="check"><input type="checkbox" class="evt" value="help" checked> 🆘 “I need help” button</label>
+        </div>
+
+        <div class="notice" id="ntfyMsg"></div>
+        <button class="aux-btn" id="ntfyTest" style="flex:none; padding:10px 18px;">🔔 Send test notification</button>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="setup-step" data-step="4">
+        <h2>4. All set! 🎉</h2>
+        <div id="summary" class="lead"></div>
+        <div class="notice" id="saveMsg"></div>
+      </div>
+
+      <div class="nav-row">
+        <button class="aux-btn" id="backBtn" style="flex:none; padding:12px 22px;">⬅️ Back</button>
+        <button class="btn-start-chore" id="nextBtn" style="padding:12px 26px;">Next ➡️</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/setup.js"></script>
+</body>
+</html>

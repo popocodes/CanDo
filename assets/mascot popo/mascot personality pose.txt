@@ -1,0 +1,25 @@
+Core Personality: Enthusiastic, goofy, zero-judgment, supportive co-pilot.
+
+    Onboarding & Login Gate: Warm, welcoming, excited, friendly.
+
+    Spaceship Hub (Launch Pad): Relaxed, curious, observant, chill.
+
+    Mission Radar: Empowering, trusting, encouraging, deferential.
+
+    Micro-Step Screen: Focused, patient, cheerful, motivating.
+
+    2D AR Camera Guide: Playful, quirky, adventurous, explorative.
+
+    Pause & SOS: Calm, reassuring, protective, non-judgmental.
+
+    Self-Assessment Checkpoint: Curious, gentle, grounding, validating.
+
+    Photo Proof & Star Capsule: Proud, dependable, reassuring, celebratory.
+
+    Parent Verification (Approved): Joyful, ecstatic, proud, celebratory.
+
+    Parent Verification (Needs Fixing): Collaborative, lighthearted, inquisitive, team-oriented.
+
+    Star Shop, Goal Tracker & Inventory: Cheerful, optimistic, helpful, forward-looking.
+
+    Decompression Mode (Bubble Pop): Quiet, soft, peaceful, low-energy.

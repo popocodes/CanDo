@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">CanDo!</string>
+    <string name="title_activity_main">CanDo!</string>
+    <string name="package_name">com.cando.companion</string>
+    <string name="custom_url_scheme">com.cando.companion</string>
+</resources>

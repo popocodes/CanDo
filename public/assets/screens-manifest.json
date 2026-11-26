@@ -1,0 +1,826 @@
+{
+  "Error & Empty States": [
+    {
+      "file": "1.3d Target Lost.svg",
+      "code": "1.3d",
+      "title": "Target Lost",
+      "rel_path": "assets/screens/Error & Empty States/1.3d Target Lost.svg"
+    },
+    {
+      "file": "2.10a No New Notifications.svg",
+      "code": "2.10a",
+      "title": "No New Notifications",
+      "rel_path": "assets/screens/Error & Empty States/2.10a No New Notifications.svg"
+    },
+    {
+      "file": "2.12 Parent Offline.svg",
+      "code": "2.12",
+      "title": "Parent Offline",
+      "rel_path": "assets/screens/Error & Empty States/2.12 Parent Offline.svg"
+    },
+    {
+      "file": "2.6d Sent Back.svg",
+      "code": "2.6d",
+      "title": "Sent Back",
+      "rel_path": "assets/screens/Error & Empty States/2.6d Sent Back.svg"
+    },
+    {
+      "file": "2.6e Inbox All Clear.svg",
+      "code": "2.6e",
+      "title": "Inbox All Clear",
+      "rel_path": "assets/screens/Error & Empty States/2.6e Inbox All Clear.svg"
+    },
+    {
+      "file": "2.8a No Routines Yet.svg",
+      "code": "2.8a",
+      "title": "No Routines Yet",
+      "rel_path": "assets/screens/Error & Empty States/2.8a No Routines Yet.svg"
+    },
+    {
+      "file": "3.5 Offline \u00b7 Saved for Later.svg",
+      "code": "3.5",
+      "title": "Offline \u00b7 Saved for Later",
+      "rel_path": "assets/screens/Error & Empty States/3.5 Offline \u00b7 Saved for Later.svg"
+    },
+    {
+      "file": "4.3c Needs Fixing.svg",
+      "code": "4.3c",
+      "title": "Needs Fixing",
+      "rel_path": "assets/screens/Error & Empty States/4.3c Needs Fixing.svg"
+    },
+    {
+      "file": "4.3e Camera Permission.svg",
+      "code": "4.3e",
+      "title": "Camera Permission",
+      "rel_path": "assets/screens/Error & Empty States/4.3e Camera Permission.svg"
+    },
+    {
+      "file": "4.3f Camera Is Off.svg",
+      "code": "4.3f",
+      "title": "Camera Is Off",
+      "rel_path": "assets/screens/Error & Empty States/4.3f Camera Is Off.svg"
+    },
+    {
+      "file": "4.3g Photo Did Not Send.svg",
+      "code": "4.3g",
+      "title": "Photo Did Not Send",
+      "rel_path": "assets/screens/Error & Empty States/4.3g Photo Did Not Send.svg"
+    },
+    {
+      "file": "5.3a Not Enough Stars Yet.svg",
+      "code": "5.3a",
+      "title": "Not Enough Stars Yet",
+      "rel_path": "assets/screens/Error & Empty States/5.3a Not Enough Stars Yet.svg"
+    },
+    {
+      "file": "5.3b Purchase Cap Reached.svg",
+      "code": "5.3b",
+      "title": "Purchase Cap Reached",
+      "rel_path": "assets/screens/Error & Empty States/5.3b Purchase Cap Reached.svg"
+    },
+    {
+      "file": "5.4b Empty Inventory.svg",
+      "code": "5.4b",
+      "title": "Empty Inventory",
+      "rel_path": "assets/screens/Error & Empty States/5.4b Empty Inventory.svg"
+    }
+  ],
+  "Security and onboarding": [
+    {
+      "file": "1.0 Role Select.svg",
+      "code": "1.0",
+      "title": "Role Select",
+      "rel_path": "assets/screens/Security and onboarding/1.0 Role Select.svg"
+    },
+    {
+      "file": "1.1 Splash.svg",
+      "code": "1.1",
+      "title": "Splash",
+      "rel_path": "assets/screens/Security and onboarding/1.1 Splash.svg"
+    },
+    {
+      "file": "1.1a Parent Auth Gateway.svg",
+      "code": "1.1a",
+      "title": "Parent Auth Gateway",
+      "rel_path": "assets/screens/Security and onboarding/1.1a Parent Auth Gateway.svg"
+    },
+    {
+      "file": "1.1b Create Account.svg",
+      "code": "1.1b",
+      "title": "Create Account",
+      "rel_path": "assets/screens/Security and onboarding/1.1b Create Account.svg"
+    },
+    {
+      "file": "1.1c Log In.svg",
+      "code": "1.1c",
+      "title": "Log In",
+      "rel_path": "assets/screens/Security and onboarding/1.1c Log In.svg"
+    },
+    {
+      "file": "1.1d Forgot Password.svg",
+      "code": "1.1d",
+      "title": "Forgot Password",
+      "rel_path": "assets/screens/Security and onboarding/1.1d Forgot Password.svg"
+    },
+    {
+      "file": "1.1e Reset Link Sent.svg",
+      "code": "1.1e",
+      "title": "Reset Link Sent",
+      "rel_path": "assets/screens/Security and onboarding/1.1e Reset Link Sent.svg"
+    },
+    {
+      "file": "1.1f Set New Password.svg",
+      "code": "1.1f",
+      "title": "Set New Password",
+      "rel_path": "assets/screens/Security and onboarding/1.1f Set New Password.svg"
+    },
+    {
+      "file": "1.1g Create Parent PIN.svg",
+      "code": "1.1g",
+      "title": "Create Parent PIN",
+      "rel_path": "assets/screens/Security and onboarding/1.1g Create Parent PIN.svg"
+    },
+    {
+      "file": "1.1h Confirm Parent PIN.svg",
+      "code": "1.1h",
+      "title": "Confirm Parent PIN",
+      "rel_path": "assets/screens/Security and onboarding/1.1h Confirm Parent PIN.svg"
+    },
+    {
+      "file": "1.1i Forgot PIN.svg",
+      "code": "1.1i",
+      "title": "Forgot PIN",
+      "rel_path": "assets/screens/Security and onboarding/1.1i Forgot PIN.svg"
+    },
+    {
+      "file": "1.1j Enter Reset Code.svg",
+      "code": "1.1j",
+      "title": "Enter Reset Code",
+      "rel_path": "assets/screens/Security and onboarding/1.1j Enter Reset Code.svg"
+    },
+    {
+      "file": "1.1k Enter HQ PIN.svg",
+      "code": "1.1k",
+      "title": "Enter HQ PIN",
+      "rel_path": "assets/screens/Security and onboarding/1.1k Enter HQ PIN.svg"
+    },
+    {
+      "file": "1.2a Parent Tutorial 1.svg",
+      "code": "1.2a",
+      "title": "Parent Tutorial 1",
+      "rel_path": "assets/screens/Security and onboarding/1.2a Parent Tutorial 1.svg"
+    },
+    {
+      "file": "1.2b Parent Tutorial 2.svg",
+      "code": "1.2b",
+      "title": "Parent Tutorial 2",
+      "rel_path": "assets/screens/Security and onboarding/1.2b Parent Tutorial 2.svg"
+    },
+    {
+      "file": "1.2c Parent Tutorial 3.svg",
+      "code": "1.2c",
+      "title": "Parent Tutorial 3",
+      "rel_path": "assets/screens/Security and onboarding/1.2c Parent Tutorial 3.svg"
+    },
+    {
+      "file": "1.2d Parent Tutorial 4.svg",
+      "code": "1.2d",
+      "title": "Parent Tutorial 4",
+      "rel_path": "assets/screens/Security and onboarding/1.2d Parent Tutorial 4.svg"
+    },
+    {
+      "file": "1.3a Add a Cadet.svg",
+      "code": "1.3a",
+      "title": "Add a Cadet",
+      "rel_path": "assets/screens/Security and onboarding/1.3a Add a Cadet.svg"
+    },
+    {
+      "file": "1.3b Pairing QR.svg",
+      "code": "1.3b",
+      "title": "Pairing QR",
+      "rel_path": "assets/screens/Security and onboarding/1.3b Pairing QR.svg"
+    },
+    {
+      "file": "1.3c Scan on Child Device.svg",
+      "code": "1.3c",
+      "title": "Scan on Child Device",
+      "rel_path": "assets/screens/Security and onboarding/1.3c Scan on Child Device.svg"
+    },
+    {
+      "file": "1.3e Paired Successfully.svg",
+      "code": "1.3e",
+      "title": "Paired Successfully",
+      "rel_path": "assets/screens/Security and onboarding/1.3e Paired Successfully.svg"
+    },
+    {
+      "file": "1.3f Edit Cadet Profile.svg",
+      "code": "1.3f",
+      "title": "Edit Cadet Profile",
+      "rel_path": "assets/screens/Security and onboarding/1.3f Edit Cadet Profile.svg"
+    },
+    {
+      "file": "1.3g Your Family.svg",
+      "code": "1.3g",
+      "title": "Your Family",
+      "rel_path": "assets/screens/Security and onboarding/1.3g Your Family.svg"
+    },
+    {
+      "file": "1.4a Child Tutorial 1.svg",
+      "code": "1.4a",
+      "title": "Child Tutorial 1",
+      "rel_path": "assets/screens/Security and onboarding/1.4a Child Tutorial 1.svg"
+    },
+    {
+      "file": "1.4b Child Tutorial 2.svg",
+      "code": "1.4b",
+      "title": "Child Tutorial 2",
+      "rel_path": "assets/screens/Security and onboarding/1.4b Child Tutorial 2.svg"
+    },
+    {
+      "file": "1.4c Child Tutorial 3.svg",
+      "code": "1.4c",
+      "title": "Child Tutorial 3",
+      "rel_path": "assets/screens/Security and onboarding/1.4c Child Tutorial 3.svg"
+    },
+    {
+      "file": "1.4d Child Tutorial 4.svg",
+      "code": "1.4d",
+      "title": "Child Tutorial 4",
+      "rel_path": "assets/screens/Security and onboarding/1.4d Child Tutorial 4.svg"
+    },
+    {
+      "file": "1.4e Shared Device Login.svg",
+      "code": "1.4e",
+      "title": "Shared Device Login",
+      "rel_path": "assets/screens/Security and onboarding/1.4e Shared Device Login.svg"
+    }
+  ],
+  "child home screens": [
+    {
+      "file": "3.1 Kids Home.svg",
+      "code": "3.1",
+      "title": "Kids Home",
+      "rel_path": "assets/screens/child home screens/3.1 Kids Home.svg"
+    },
+    {
+      "file": "3.4 Welcome Back \u00b7 Fresh Start.svg",
+      "code": "3.4",
+      "title": "Welcome Back \u00b7 Fresh Start",
+      "rel_path": "assets/screens/child home screens/3.4 Welcome Back \u00b7 Fresh Start.svg"
+    },
+    {
+      "file": "3.6 Stars Approved \u00b7 Celebration.svg",
+      "code": "3.6",
+      "title": "Stars Approved \u00b7 Celebration",
+      "rel_path": "assets/screens/child home screens/3.6 Stars Approved \u00b7 Celebration.svg"
+    }
+  ],
+  "parent hq screens": [
+    {
+      "file": "2.10 Notifications.svg",
+      "code": "2.10",
+      "title": "Notifications",
+      "rel_path": "assets/screens/parent hq screens/2.10 Notifications.svg"
+    },
+    {
+      "file": "2.11 Help & Support.svg",
+      "code": "2.11",
+      "title": "Help & Support",
+      "rel_path": "assets/screens/parent hq screens/2.11 Help & Support.svg"
+    },
+    {
+      "file": "2.1a Choose a Room.svg",
+      "code": "2.1a",
+      "title": "Choose a Room",
+      "rel_path": "assets/screens/parent hq screens/2.1a Choose a Room.svg"
+    },
+    {
+      "file": "2.1b Bedroom \u00b7 Pick Chores.svg",
+      "code": "2.1b",
+      "title": "Bedroom \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1b Bedroom \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1c Kitchen \u00b7 Pick Chores.svg",
+      "code": "2.1c",
+      "title": "Kitchen \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1c Kitchen \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1d Bathroom \u00b7 Pick Chores.svg",
+      "code": "2.1d",
+      "title": "Bathroom \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1d Bathroom \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1e Living Room \u00b7 Pick Chores.svg",
+      "code": "2.1e",
+      "title": "Living Room \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1e Living Room \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1f Study \u00b7 Pick Chores.svg",
+      "code": "2.1f",
+      "title": "Study \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1f Study \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1g Laundry \u00b7 Pick Chores.svg",
+      "code": "2.1g",
+      "title": "Laundry \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1g Laundry \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1h Dining Area \u00b7 Pick Chores.svg",
+      "code": "2.1h",
+      "title": "Dining Area \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1h Dining Area \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1i Entryway \u00b7 Pick Chores.svg",
+      "code": "2.1i",
+      "title": "Entryway \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1i Entryway \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1j School Bag \u00b7 Pick Chores.svg",
+      "code": "2.1j",
+      "title": "School Bag \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1j School Bag \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1k Shared Room \u00b7 Pick Chores.svg",
+      "code": "2.1k",
+      "title": "Shared Room \u00b7 Pick Chores",
+      "rel_path": "assets/screens/parent hq screens/2.1k Shared Room \u00b7 Pick Chores.svg"
+    },
+    {
+      "file": "2.1l Room Access \u00b7 Safety Gate.svg",
+      "code": "2.1l",
+      "title": "Room Access \u00b7 Safety Gate",
+      "rel_path": "assets/screens/parent hq screens/2.1l Room Access \u00b7 Safety Gate.svg"
+    },
+    {
+      "file": "2.1m Bedroom \u00b7 Micro Steps.svg",
+      "code": "2.1m",
+      "title": "Bedroom \u00b7 Micro Steps",
+      "rel_path": "assets/screens/parent hq screens/2.1m Bedroom \u00b7 Micro Steps.svg"
+    },
+    {
+      "file": "2.2 Deploy Mission.svg",
+      "code": "2.2",
+      "title": "Deploy Mission",
+      "rel_path": "assets/screens/parent hq screens/2.2 Deploy Mission.svg"
+    },
+    {
+      "file": "2.2a Pick Date & Time.svg",
+      "code": "2.2a",
+      "title": "Pick Date & Time",
+      "rel_path": "assets/screens/parent hq screens/2.2a Pick Date & Time.svg"
+    },
+    {
+      "file": "2.2b Mission Control.svg",
+      "code": "2.2b",
+      "title": "Mission Control",
+      "rel_path": "assets/screens/parent hq screens/2.2b Mission Control.svg"
+    },
+    {
+      "file": "2.2c Cancel Mission_.svg",
+      "code": "2.2c",
+      "title": "Cancel Mission_",
+      "rel_path": "assets/screens/parent hq screens/2.2c Cancel Mission_.svg"
+    },
+    {
+      "file": "2.2d Send Heads-up.svg",
+      "code": "2.2d",
+      "title": "Send Heads-up",
+      "rel_path": "assets/screens/parent hq screens/2.2d Send Heads-up.svg"
+    },
+    {
+      "file": "2.3 Dashboard Overview.svg",
+      "code": "2.3",
+      "title": "Dashboard Overview",
+      "rel_path": "assets/screens/parent hq screens/2.3 Dashboard Overview.svg"
+    },
+    {
+      "file": "2.3a Dashboard \u00b7 Mission Started.svg",
+      "code": "2.3a",
+      "title": "Dashboard \u00b7 Mission Started",
+      "rel_path": "assets/screens/parent hq screens/2.3a Dashboard \u00b7 Mission Started.svg"
+    },
+    {
+      "file": "2.3c Dashboard \u00b7 SOS Alert.svg",
+      "code": "2.3c",
+      "title": "Dashboard \u00b7 SOS Alert",
+      "rel_path": "assets/screens/parent hq screens/2.3c Dashboard \u00b7 SOS Alert.svg"
+    },
+    {
+      "file": "2.4 Perk Shop Manager.svg",
+      "code": "2.4",
+      "title": "Perk Shop Manager",
+      "rel_path": "assets/screens/parent hq screens/2.4 Perk Shop Manager.svg"
+    },
+    {
+      "file": "2.5 Perk Requests.svg",
+      "code": "2.5",
+      "title": "Perk Requests",
+      "rel_path": "assets/screens/parent hq screens/2.5 Perk Requests.svg"
+    },
+    {
+      "file": "2.6 Parent Inbox.svg",
+      "code": "2.6",
+      "title": "Parent Inbox",
+      "rel_path": "assets/screens/parent hq screens/2.6 Parent Inbox.svg"
+    },
+    {
+      "file": "2.6a Proof Review.svg",
+      "code": "2.6a",
+      "title": "Proof Review",
+      "rel_path": "assets/screens/parent hq screens/2.6a Proof Review.svg"
+    },
+    {
+      "file": "2.6b Proof Review \u00b7 2nd Attempt.svg",
+      "code": "2.6b",
+      "title": "Proof Review \u00b7 2nd Attempt",
+      "rel_path": "assets/screens/parent hq screens/2.6b Proof Review \u00b7 2nd Attempt.svg"
+    },
+    {
+      "file": "2.6c Archive.svg",
+      "code": "2.6c",
+      "title": "Archive",
+      "rel_path": "assets/screens/parent hq screens/2.6c Archive.svg"
+    },
+    {
+      "file": "2.7 Settings.svg",
+      "code": "2.7",
+      "title": "Settings",
+      "rel_path": "assets/screens/parent hq screens/2.7 Settings.svg"
+    },
+    {
+      "file": "2.7b Notification Settings.svg",
+      "code": "2.7b",
+      "title": "Notification Settings",
+      "rel_path": "assets/screens/parent hq screens/2.7b Notification Settings.svg"
+    },
+    {
+      "file": "2.7c Privacy.svg",
+      "code": "2.7c",
+      "title": "Privacy",
+      "rel_path": "assets/screens/parent hq screens/2.7c Privacy.svg"
+    },
+    {
+      "file": "2.7e Remove a Cadet.svg",
+      "code": "2.7e",
+      "title": "Remove a Cadet",
+      "rel_path": "assets/screens/parent hq screens/2.7e Remove a Cadet.svg"
+    },
+    {
+      "file": "2.7f Log Out_.svg",
+      "code": "2.7f",
+      "title": "Log Out_",
+      "rel_path": "assets/screens/parent hq screens/2.7f Log Out_.svg"
+    },
+    {
+      "file": "2.7g Cadet Experience.svg",
+      "code": "2.7g",
+      "title": "Cadet Experience",
+      "rel_path": "assets/screens/parent hq screens/2.7g Cadet Experience.svg"
+    },
+    {
+      "file": "2.7h Language.svg",
+      "code": "2.7h",
+      "title": "Language",
+      "rel_path": "assets/screens/parent hq screens/2.7h Language.svg"
+    },
+    {
+      "file": "2.8 Routines.svg",
+      "code": "2.8",
+      "title": "Routines",
+      "rel_path": "assets/screens/parent hq screens/2.8 Routines.svg"
+    },
+    {
+      "file": "2.8b Routine Details.svg",
+      "code": "2.8b",
+      "title": "Routine Details",
+      "rel_path": "assets/screens/parent hq screens/2.8b Routine Details.svg"
+    },
+    {
+      "file": "2.9 Reports \u00b7 Missed Days.svg",
+      "code": "2.9",
+      "title": "Reports \u00b7 Missed Days",
+      "rel_path": "assets/screens/parent hq screens/2.9 Reports \u00b7 Missed Days.svg"
+    },
+    {
+      "file": "2.9a Reports \u00b7 Cadet Details.svg",
+      "code": "2.9a",
+      "title": "Reports \u00b7 Cadet Details",
+      "rel_path": "assets/screens/parent hq screens/2.9a Reports \u00b7 Cadet Details.svg"
+    }
+  ],
+  "reward screens": [
+    {
+      "file": "5.3 Star Shop.svg",
+      "code": "5.3",
+      "title": "Star Shop",
+      "rel_path": "assets/screens/reward screens/5.3 Star Shop.svg"
+    },
+    {
+      "file": "5.3c Purchase Confirmation.svg",
+      "code": "5.3c",
+      "title": "Purchase Confirmation",
+      "rel_path": "assets/screens/reward screens/5.3c Purchase Confirmation.svg"
+    },
+    {
+      "file": "5.3d Request Sent \u00b7 Escrow.svg",
+      "code": "5.3d",
+      "title": "Request Sent \u00b7 Escrow",
+      "rel_path": "assets/screens/reward screens/5.3d Request Sent \u00b7 Escrow.svg"
+    },
+    {
+      "file": "5.4 Child Inventory.svg",
+      "code": "5.4",
+      "title": "Child Inventory",
+      "rel_path": "assets/screens/reward screens/5.4 Child Inventory.svg"
+    },
+    {
+      "file": "5.4a Commander\u2019s Key Activation.svg",
+      "code": "5.4a",
+      "title": "Commander\u2019s Key Activation",
+      "rel_path": "assets/screens/reward screens/5.4a Commander\u2019s Key Activation.svg"
+    },
+    {
+      "file": "5.5 Free Time Arcade.svg",
+      "code": "5.5",
+      "title": "Free Time Arcade",
+      "rel_path": "assets/screens/reward screens/5.5 Free Time Arcade.svg"
+    },
+    {
+      "file": "5.5a Bubble Pop.svg",
+      "code": "5.5a",
+      "title": "Bubble Pop",
+      "rel_path": "assets/screens/reward screens/5.5a Bubble Pop.svg"
+    }
+  ],
+  "task screens": [
+    {
+      "file": "4.0 Bedroom Check-in.svg",
+      "code": "4.0",
+      "title": "Bedroom Check-in",
+      "rel_path": "assets/screens/task screens/4.0 Bedroom Check-in.svg"
+    },
+    {
+      "file": "4.1 Micro-Step \u00b7 Step 1.svg",
+      "code": "4.1",
+      "title": "Micro-Step \u00b7 Step 1",
+      "rel_path": "assets/screens/task screens/4.1 Micro-Step \u00b7 Step 1.svg"
+    },
+    {
+      "file": "4.1a Mission Paused.svg",
+      "code": "4.1a",
+      "title": "Mission Paused",
+      "rel_path": "assets/screens/task screens/4.1a Mission Paused.svg"
+    },
+    {
+      "file": "4.1b AR Camera Guide.svg",
+      "code": "4.1b",
+      "title": "AR Camera Guide",
+      "rel_path": "assets/screens/task screens/4.1b AR Camera Guide.svg"
+    },
+    {
+      "file": "4.1c Micro-Step \u00b7 Step 5.svg",
+      "code": "4.1c",
+      "title": "Micro-Step \u00b7 Step 5",
+      "rel_path": "assets/screens/task screens/4.1c Micro-Step \u00b7 Step 5.svg"
+    },
+    {
+      "file": "4.1d Micro-Step \u00b7 Step 2.svg",
+      "code": "4.1d",
+      "title": "Micro-Step \u00b7 Step 2",
+      "rel_path": "assets/screens/task screens/4.1d Micro-Step \u00b7 Step 2.svg"
+    },
+    {
+      "file": "4.1e Micro-Step \u00b7 Step 3.svg",
+      "code": "4.1e",
+      "title": "Micro-Step \u00b7 Step 3",
+      "rel_path": "assets/screens/task screens/4.1e Micro-Step \u00b7 Step 3.svg"
+    },
+    {
+      "file": "4.1f Micro-Step \u00b7 Step 4.svg",
+      "code": "4.1f",
+      "title": "Micro-Step \u00b7 Step 4",
+      "rel_path": "assets/screens/task screens/4.1f Micro-Step \u00b7 Step 4.svg"
+    },
+    {
+      "file": "4.1g Step Skipped.svg",
+      "code": "4.1g",
+      "title": "Step Skipped",
+      "rel_path": "assets/screens/task screens/4.1g Step Skipped.svg"
+    },
+    {
+      "file": "4.1h Grown-up Help.svg",
+      "code": "4.1h",
+      "title": "Grown-up Help",
+      "rel_path": "assets/screens/task screens/4.1h Grown-up Help.svg"
+    },
+    {
+      "file": "4.1i Half Star Won Back.svg",
+      "code": "4.1i",
+      "title": "Half Star Won Back",
+      "rel_path": "assets/screens/task screens/4.1i Half Star Won Back.svg"
+    },
+    {
+      "file": "4.2 Waiting for Commander.svg",
+      "code": "4.2",
+      "title": "Waiting for Commander",
+      "rel_path": "assets/screens/task screens/4.2 Waiting for Commander.svg"
+    },
+    {
+      "file": "4.2a Self-Check \u00b7 Clean Enough_.svg",
+      "code": "4.2a",
+      "title": "Self-Check \u00b7 Clean Enough_",
+      "rel_path": "assets/screens/task screens/4.2a Self-Check \u00b7 Clean Enough_.svg"
+    },
+    {
+      "file": "4.2b Self-Check \u00b7 One More Round.svg",
+      "code": "4.2b",
+      "title": "Self-Check \u00b7 One More Round",
+      "rel_path": "assets/screens/task screens/4.2b Self-Check \u00b7 One More Round.svg"
+    },
+    {
+      "file": "4.2c Self-Check \u00b7 Great For Today.svg",
+      "code": "4.2c",
+      "title": "Self-Check \u00b7 Great For Today",
+      "rel_path": "assets/screens/task screens/4.2c Self-Check \u00b7 Great For Today.svg"
+    },
+    {
+      "file": "4.2d Early Submit \u00b7 Picture Sent.svg",
+      "code": "4.2d",
+      "title": "Early Submit \u00b7 Picture Sent",
+      "rel_path": "assets/screens/task screens/4.2d Early Submit \u00b7 Picture Sent.svg"
+    },
+    {
+      "file": "4.3 Photo Proof.svg",
+      "code": "4.3",
+      "title": "Photo Proof",
+      "rel_path": "assets/screens/task screens/4.3 Photo Proof.svg"
+    },
+    {
+      "file": "4.3a Photo Saved.svg",
+      "code": "4.3a",
+      "title": "Photo Saved",
+      "rel_path": "assets/screens/task screens/4.3a Photo Saved.svg"
+    },
+    {
+      "file": "4.3b Star Capsule.svg",
+      "code": "4.3b",
+      "title": "Star Capsule",
+      "rel_path": "assets/screens/task screens/4.3b Star Capsule.svg"
+    },
+    {
+      "file": "4.3d Verified Together.svg",
+      "code": "4.3d",
+      "title": "Verified Together",
+      "rel_path": "assets/screens/task screens/4.3d Verified Together.svg"
+    }
+  ],
+  "wardrobe screens": [
+    {
+      "file": "6.0 Wardrobe \u00b7 New Cadet.svg",
+      "code": "6.0",
+      "title": "Wardrobe \u00b7 New Cadet",
+      "rel_path": "assets/screens/wardrobe screens/6.0 Wardrobe \u00b7 New Cadet.svg"
+    },
+    {
+      "file": "6.0a Wardrobe \u00b7 New Cadet \u00b7 Gear.svg",
+      "code": "6.0a",
+      "title": "Wardrobe \u00b7 New Cadet \u00b7 Gear",
+      "rel_path": "assets/screens/wardrobe screens/6.0a Wardrobe \u00b7 New Cadet \u00b7 Gear.svg"
+    },
+    {
+      "file": "6.0b Wardrobe \u00b7 New Cadet \u00b7 Backdrops.svg",
+      "code": "6.0b",
+      "title": "Wardrobe \u00b7 New Cadet \u00b7 Backdrops",
+      "rel_path": "assets/screens/wardrobe screens/6.0b Wardrobe \u00b7 New Cadet \u00b7 Backdrops.svg"
+    },
+    {
+      "file": "6.1 Wardrobe \u00b7 Hats.svg",
+      "code": "6.1",
+      "title": "Wardrobe \u00b7 Hats",
+      "rel_path": "assets/screens/wardrobe screens/6.1 Wardrobe \u00b7 Hats.svg"
+    },
+    {
+      "file": "6.1a Wardrobe \u00b7 Gear.svg",
+      "code": "6.1a",
+      "title": "Wardrobe \u00b7 Gear",
+      "rel_path": "assets/screens/wardrobe screens/6.1a Wardrobe \u00b7 Gear.svg"
+    },
+    {
+      "file": "6.1b Wardrobe \u00b7 Backdrops.svg",
+      "code": "6.1b",
+      "title": "Wardrobe \u00b7 Backdrops",
+      "rel_path": "assets/screens/wardrobe screens/6.1b Wardrobe \u00b7 Backdrops.svg"
+    },
+    {
+      "file": "6.1c Wardrobe \u00b7 Wearing.svg",
+      "code": "6.1c",
+      "title": "Wardrobe \u00b7 Wearing",
+      "rel_path": "assets/screens/wardrobe screens/6.1c Wardrobe \u00b7 Wearing.svg"
+    },
+    {
+      "file": "6.2 Try On \u00b7 Astro Helmet.svg",
+      "code": "6.2",
+      "title": "Try On \u00b7 Astro Helmet",
+      "rel_path": "assets/screens/wardrobe screens/6.2 Try On \u00b7 Astro Helmet.svg"
+    },
+    {
+      "file": "6.2.1 Try On \u00b7 Star Cap.svg",
+      "code": "6.2.1",
+      "title": "Try On \u00b7 Star Cap",
+      "rel_path": "assets/screens/wardrobe screens/6.2.1 Try On \u00b7 Star Cap.svg"
+    },
+    {
+      "file": "6.2.10 Try On Backdrop \u00b7 Sunny Planet.svg",
+      "code": "6.2.10",
+      "title": "Try On Backdrop \u00b7 Sunny Planet",
+      "rel_path": "assets/screens/wardrobe screens/6.2.10 Try On Backdrop \u00b7 Sunny Planet.svg"
+    },
+    {
+      "file": "6.2.11 Try On Backdrop \u00b7 Pink Nebula.svg",
+      "code": "6.2.11",
+      "title": "Try On Backdrop \u00b7 Pink Nebula",
+      "rel_path": "assets/screens/wardrobe screens/6.2.11 Try On Backdrop \u00b7 Pink Nebula.svg"
+    },
+    {
+      "file": "6.2.2 Try On \u00b7 Crown.svg",
+      "code": "6.2.2",
+      "title": "Try On \u00b7 Crown",
+      "rel_path": "assets/screens/wardrobe screens/6.2.2 Try On \u00b7 Crown.svg"
+    },
+    {
+      "file": "6.2.3 Try On \u00b7 Moon Beanie.svg",
+      "code": "6.2.3",
+      "title": "Try On \u00b7 Moon Beanie",
+      "rel_path": "assets/screens/wardrobe screens/6.2.3 Try On \u00b7 Moon Beanie.svg"
+    },
+    {
+      "file": "6.2.4 Try On \u00b7 Star Shades.svg",
+      "code": "6.2.4",
+      "title": "Try On \u00b7 Star Shades",
+      "rel_path": "assets/screens/wardrobe screens/6.2.4 Try On \u00b7 Star Shades.svg"
+    },
+    {
+      "file": "6.2.5 Try On \u00b7 Space Goggles.svg",
+      "code": "6.2.5",
+      "title": "Try On \u00b7 Space Goggles",
+      "rel_path": "assets/screens/wardrobe screens/6.2.5 Try On \u00b7 Space Goggles.svg"
+    },
+    {
+      "file": "6.2.6 Try On \u00b7 Hero Cape.svg",
+      "code": "6.2.6",
+      "title": "Try On \u00b7 Hero Cape",
+      "rel_path": "assets/screens/wardrobe screens/6.2.6 Try On \u00b7 Hero Cape.svg"
+    },
+    {
+      "file": "6.2.7 Try On \u00b7 Bow Tie.svg",
+      "code": "6.2.7",
+      "title": "Try On \u00b7 Bow Tie",
+      "rel_path": "assets/screens/wardrobe screens/6.2.7 Try On \u00b7 Bow Tie.svg"
+    },
+    {
+      "file": "6.2.8 Try On Backdrop \u00b7 Cosmic Glow.svg",
+      "code": "6.2.8",
+      "title": "Try On Backdrop \u00b7 Cosmic Glow",
+      "rel_path": "assets/screens/wardrobe screens/6.2.8 Try On Backdrop \u00b7 Cosmic Glow.svg"
+    },
+    {
+      "file": "6.2.9 Try On Backdrop \u00b7 Moon Mint.svg",
+      "code": "6.2.9",
+      "title": "Try On Backdrop \u00b7 Moon Mint",
+      "rel_path": "assets/screens/wardrobe screens/6.2.9 Try On Backdrop \u00b7 Moon Mint.svg"
+    },
+    {
+      "file": "6.2a Get It_ \u00b7 Astro Helmet.svg",
+      "code": "6.2a",
+      "title": "Get It_ \u00b7 Astro Helmet",
+      "rel_path": "assets/screens/wardrobe screens/6.2a Get It_ \u00b7 Astro Helmet.svg"
+    },
+    {
+      "file": "6.2b Not Enough Stars \u00b7 Crown.svg",
+      "code": "6.2b",
+      "title": "Not Enough Stars \u00b7 Crown",
+      "rel_path": "assets/screens/wardrobe screens/6.2b Not Enough Stars \u00b7 Crown.svg"
+    },
+    {
+      "file": "6.3 New Gear Unlocked.svg",
+      "code": "6.3",
+      "title": "New Gear Unlocked",
+      "rel_path": "assets/screens/wardrobe screens/6.3 New Gear Unlocked.svg"
+    },
+    {
+      "file": "6.4 Look Saved.svg",
+      "code": "6.4",
+      "title": "Look Saved",
+      "rel_path": "assets/screens/wardrobe screens/6.4 Look Saved.svg"
+    }
+  ]
+}

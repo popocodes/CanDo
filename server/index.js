@@ -32,7 +32,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Serve static frontend files
+// Serve CanDo APK directly from Desktop
+app.get('/CanDo.apk', (req, res) => {
+  res.download(path.join(__dirname, '..', '..', 'CanDo.apk'), 'CanDo.apk');
+});
+
+// Serve static frontend files and root assets
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Server-Sent Events (SSE) connections for live parent alerts
@@ -803,6 +809,162 @@ app.delete('/api/alerts/clear', async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+
+// ==========================================================================
+// ONE-TIME EXPIRING QR PAIRING (1.3b, 1.3c, 1.3d, 1.3e)
+// 60-Second Server-Side One-Time Tokens (As specified by Fodibey & Rafa)
+// ==========================================================================
+const pairingTokens = new Map();
+
+// Periodically purge expired pairing tokens every 15 seconds
+setInterval(() => {
+  const now = Date.now();
+  for (const [token, data] of pairingTokens.entries()) {
+    if (data.expires_at < now) {
+      pairingTokens.delete(token);
+    }
+  }
+}, 15000);
+
+app.post('/api/pairing/generate', async (req, res) => {
+  try {
+    const { kid_id } = req.body;
+    if (!kid_id) return res.status(400).json({ error: 'kid_id is required' });
+
+    const kid = await get('SELECT * FROM kids WHERE id = ?', [kid_id]);
+    if (!kid) return res.status(404).json({ error: 'Cadet not found' });
+
+    // Server-side random one-time cryptographic token (never plain user ID)
+    const crypto = require('crypto');
+    const randomHex = crypto.randomBytes(3).toString('hex').toUpperCase(); // e.g. 7F9A2B
+    const token = `CAN-${randomHex}`;
+    const expiresAt = Date.now() + 60 * 1000; // strictly 60 seconds
+
+    const payload = JSON.stringify({
+      app: 'cando',
+      type: 'pairing_token',
+      token,
+      kid_id: kid.id,
+      kid_name: kid.name,
+      expires_at: expiresAt
+    });
+
+    const QRCode = require('qrcode');
+    const qrDataUrl = await QRCode.toDataURL(payload, {
+      errorCorrectionLevel: 'M',
+      margin: 2,
+      width: 280,
+      color: {
+        dark: '#14132B',
+        light: '#FFFFFF'
+      }
+    });
+
+    pairingTokens.set(token, {
+      token,
+      kid_id: kid.id,
+      kid_name: kid.name,
+      created_at: Date.now(),
+      expires_at: expiresAt,
+      used: false,
+      status: 'pending'
+    });
+
+    res.json({
+      success: true,
+      token,
+      code: token,
+      expires_in: 60,
+      expires_at: expiresAt,
+      qr_data_url: qrDataUrl,
+      cadet: {
+        id: kid.id,
+        name: kid.name,
+        avatar: kid.avatar,
+        color: kid.color
+      }
+    });
+  } catch (err) {
+    console.error('Failed to generate pairing QR', err);
+    res.status(500).json({ error: 'Failed to generate pairing token' });
+  }
+});
+
+app.get('/api/pairing/status/:token', (req, res) => {
+  const token = String(req.params.token).trim().toUpperCase();
+  const data = pairingTokens.get(token);
+  if (!data) {
+    return res.json({ status: 'expired', error: 'Token not found or expired' });
+  }
+  if (data.expires_at < Date.now()) {
+    pairingTokens.delete(token);
+    return res.json({ status: 'expired', error: 'Token expired (60s limit reached)' });
+  }
+  if (data.used) {
+    return res.json({ status: 'claimed', cadet: { id: data.kid_id, name: data.kid_name } });
+  }
+  res.json({
+    status: 'pending',
+    remaining_seconds: Math.max(0, Math.round((data.expires_at - Date.now()) / 1000))
+  });
+});
+
+app.post('/api/pairing/claim', async (req, res) => {
+  try {
+    let { token } = req.body;
+    if (!token) return res.status(400).json({ error: 'Token required' });
+
+    if (typeof token === 'string' && token.startsWith('{')) {
+      try {
+        const parsed = JSON.parse(token);
+        if (parsed.token) token = parsed.token;
+      } catch(e) {}
+    }
+    token = String(token).trim().toUpperCase();
+
+    const data = pairingTokens.get(token);
+    if (!data) {
+      return res.status(404).json({ error: 'Invalid pairing token', code: 'INVALID_TOKEN' });
+    }
+    if (data.expires_at < Date.now()) {
+      pairingTokens.delete(token);
+      return res.status(410).json({ error: 'QR Token expired (60s limit reached)', code: 'TARGET_LOST' });
+    }
+    if (data.used) {
+      return res.status(409).json({ error: 'QR Token already used', code: 'ALREADY_USED' });
+    }
+
+    // Mark single-use token as claimed
+    data.used = true;
+    data.status = 'claimed';
+
+    const kid = await get('SELECT * FROM kids WHERE id = ?', [data.kid_id]);
+    if (!kid) return res.status(404).json({ error: 'Cadet record not found' });
+
+    // Broadcast SSE to parent phone so parent screen updates live instantly
+    broadcastEvent('cadet_paired', {
+      kid_id: kid.id,
+      kid_name: kid.name,
+      token,
+      message: `Cadet ${kid.name} paired device successfully!`
+    });
+
+    res.json({
+      success: true,
+      cadet: {
+        id: kid.id,
+        name: kid.name,
+        stars: kid.stars || 10,
+        avatar: kid.avatar || 'assets/popo_mascot.png',
+        color: kid.color || '#6B5BFF'
+      }
+    });
+  } catch (err) {
+    console.error('Failed to claim pairing token', err);
+    res.status(500).json({ error: 'Failed to claim pairing token' });
   }
 });
 

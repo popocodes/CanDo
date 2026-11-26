@@ -5,3 +5,10 @@ cando.db-*
 public/uploads/*
 !public/uploads/.gitkeep
 ~$*
+
+# Build artifacts & packages
+*.apk
+*.zip
+*.log
+run_serveo.sh
+gofile_*

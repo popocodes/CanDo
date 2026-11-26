@@ -1,0 +1,259 @@
+🛏️ Quest 1: Make the Bed (Sleep Pod)
+
+Screen 1: The Hook
+
+    Popo's VO: "Sleep Pod Quest! Let's get your bed ready for hyper-sleep. Hit start when you're ready!"
+
+    Button: [🚀 Start Mission]
+
+Screen 2: Step 1
+
+    Popo's VO: "Step one! Take all clothes and toys off the bed. Make it completely empty."
+
+    Instruction Text: Take all clothes and toys off the bed.
+
+    Action: Child taps [DONE ⭐️] ➔ Star flies up!
+
+Screen 3: Step 2
+
+    Popo's VO: "Awesome. Now, pull the bottom sheet tight over the corners."
+
+    Instruction Text: Pull the bottom sheet tight over the corners.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 4: Step 3
+
+    Popo's VO: "Looking good! Grab your big blanket and pull it all the way up to the top."
+
+    Instruction Text: Pull your big blanket up to the top.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 5: Step 4
+
+    Popo's VO: "Almost done. Use your hands to smooth out the big wrinkles."
+
+    Instruction Text: Smooth out the wrinkles with your hands.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 6: Step 5
+
+    Popo's VO: "Final step! Place your pillows neatly at the top."
+
+    Instruction Text: Place your pillows neatly at the top.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 7: Mission Complete
+
+    Popo's VO: "Mission Accomplished! You earned 5 Stars! Your sleep pod looks amazing."
+
+🧺 Quest 2: Laundry Gather (Gear Maintenance)
+
+Screen 1: The Hook
+
+    Popo's VO: "Laundry Quest! HQ needs your dirty space suits for cleaning. Let's go!"
+
+    Button: [🚀 Start Mission]
+
+Screen 2: Step 1
+
+    Popo's VO: "First, grab your empty laundry basket and put it on the floor."
+
+    Instruction Text: Grab your empty laundry basket.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 3: Step 2
+
+    Popo's VO: "Look around for dirty shirts and pants. Put them in the basket."
+
+    Instruction Text: Find dirty shirts and pants. Put them in the basket.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 4: Step 3
+
+    Popo's VO: "Now, find your dirty socks and underwear. Put them in the basket."
+
+    Instruction Text: Find dirty socks and underwear. Put them in the basket.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 5: Step 4
+
+    Popo's VO: "Good job! Check under your bed for any hidden clothes."
+
+    Instruction Text: Check under your bed for hidden clothes.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 6: Step 5
+
+    Popo's VO: "Mission complete! Put the full basket next to your bedroom door."
+
+    Instruction Text: Put the full basket next to the door.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 7: Mission Complete
+
+    Popo's VO: "Mission Accomplished! 5 Stars for you! The laundry is ready for the wash."
+
+🧸 Quest 3: Clear the Floor (Asteroid Patrol)
+
+Screen 1: The Hook
+
+    Popo's VO: "Floor Patrol! There is an asteroid field on your floor. Let's clear the path!"
+
+    Button: [🚀 Start Mission]
+
+Screen 2: Step 1
+
+    Popo's VO: "First, find any trash on the floor. Throw it in the garbage bin."
+
+    Instruction Text: Find any trash. Throw it in the garbage bin.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 3: Step 2
+
+    Popo's VO: "Great! Now find all loose toys. Put them inside your toy box."
+
+    Instruction Text: Find all loose toys. Put them in the toy box.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 4: Step 3
+
+    Popo's VO: "Keep going. Find any shoes and put them away in the closet."
+
+    Instruction Text: Find any shoes. Put them in the closet.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 5: Step 4
+
+    Popo's VO: "Almost clear! Find any books on the floor and put them on the shelf."
+
+    Instruction Text: Find any books. Put them on the bookshelf.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 6: Step 5
+
+    Popo's VO: "Last check! Walk across the floor to make sure it is completely empty."
+
+    Instruction Text: Walk across the floor to make sure it is empty.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 7: Mission Complete
+
+    Popo's VO: "Mission Accomplished! 5 Stars! The landing zone is completely clear!"
+
+📚 Quest 4: Desk Organization (Research Station)
+
+Screen 1: The Hook
+
+    Popo's VO: "Research Station Quest! Let's organize your desk for the next big discovery."
+
+    Button: [🚀 Start Mission]
+
+Screen 2: Step 1
+
+    Popo's VO: "Step one. Take everything off the top of the desk and put it on the floor."
+
+    Instruction Text: Take everything off the desk. Put it on the floor.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 3: Step 2
+
+    Popo's VO: "Nice! Now put all your pencils and pens in the pencil cup."
+
+    Instruction Text: Put all pencils and pens in the pencil cup.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 4: Step 3
+
+    Popo's VO: "Grab your notebooks. Stack them in one neat pile on the desk."
+
+    Instruction Text: Stack your notebooks in one neat pile.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 5: Step 4
+
+    Popo's VO: "Almost done. Throw any trash or old papers in the garbage bin."
+
+    Instruction Text: Throw any trash in the garbage bin.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 6: Step 5
+
+    Popo's VO: "Final touch! Push your chair all the way under the desk."
+
+    Instruction Text: Push your chair under the desk.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 7: Mission Complete
+
+    Popo's VO: "Mission Accomplished! 5 Stars! Your research station is online."
+
+👕 Quest 5: Put Away Clean Clothes (Restock Quest)
+
+Screen 1: The Hook
+
+    Popo's VO: "Restock Quest! The decontamination cycle is finished. Let's put your clean clothes away."
+
+    Button: [🚀 Start Mission]
+
+Screen 2: Step 1
+
+    Popo's VO: "First, fold your clean shirts. Put them in the drawer."
+
+    Instruction Text: Fold your clean shirts. Put them in the drawer.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 3: Step 2
+
+    Popo's VO: "Great job. Now fold your clean pants and put them in the drawer."
+
+    Instruction Text: Fold your clean pants. Put them in the drawer.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 4: Step 3
+
+    Popo's VO: "Now for the tricky part. Match your clean socks into pairs."
+
+    Instruction Text: Match your clean socks into pairs.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 5: Step 4
+
+    Popo's VO: "Awesome! Put all the matched socks in your sock drawer."
+
+    Instruction Text: Put the matched socks in the drawer.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 6: Step 5
+
+    Popo's VO: "All done! Put the empty laundry basket back in its corner."
+
+    Instruction Text: Put the empty laundry basket in its corner.
+
+    Action: Child taps [DONE ⭐️]
+
+Screen 7: Mission Complete
+
+    Popo's VO: "Mission Accomplished! 5 Stars for you! Your gear is safely stored."
