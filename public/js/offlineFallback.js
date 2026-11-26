@@ -563,11 +563,11 @@
     } catch(e) {}
   }
 
-  // Seed default data if not present
+  // Seed default data if not present (Rafa's Figma Cadets: Aiman & Sara)
   if (!getStorage('cando_offline_kids', null)) {
     setStorage('cando_offline_kids', [
-      { id: 1, name: 'Buri', stars: 25, color: '#6B5BFF', avatar: 'assets/popo_waving.png' },
-      { id: 2, name: 'Leo', stars: 15, color: '#8DBD61', avatar: 'assets/popo_backpack.png' }
+      { id: 1, name: 'Aiman', stars: 25, color: '#70459E', avatar: 'assets/mascot popo/mascot poses/09-welcome-wave.png' },
+      { id: 2, name: 'Sara', stars: 15, color: '#5BBF72', avatar: 'assets/mascot popo/mascot poses/12-peek.png' }
     ]);
   }
 
@@ -897,7 +897,19 @@
 
     // /api/stats
     if (parts.length === 2 && parts[1] === 'stats') {
-      return jsonResponse({ completedChores: 12, totalStarsAwarded: 145, activeCadets: 2, proofPhotosCount: 8 });
+      var completedChores = 12;
+      var totalStars = 145;
+      return jsonResponse({
+        pendingApprovals: 0,
+        completedThisWeek: completedChores,
+        starsAwardedThisWeek: totalStars,
+        distractionsToday: 0,
+        pendingRewardClaims: 0,
+        completedChores: completedChores,
+        totalStarsAwarded: totalStars,
+        activeCadets: 2,
+        proofPhotosCount: 8
+      });
     }
 
     // /api/alerts

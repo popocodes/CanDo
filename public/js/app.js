@@ -16,7 +16,11 @@
 
 const state = {
   currentScreen: 'splash',
-  kids: [],
+  // Rafa's Figma default Cadets (Aiman & Sara)
+  kids: [
+    { id: 1, name: 'Aiman', stars: 25, color: '#70459E', avatar: 'assets/mascot popo/mascot poses/09-welcome-wave.png' },
+    { id: 2, name: 'Sara', stars: 15, color: '#5BBF72', avatar: 'assets/mascot popo/mascot poses/12-peek.png' }
+  ],
   currentKid: null,
   templates: [],
   chores: [],
@@ -275,10 +279,13 @@ function showScreen(screenId) {
     state.inChoreMode = false;
     starCounter.style.display = 'none';
     explorerBtn.style.display = 'none';
+    renderKidsGateway();
   } else if (screenId === 'parent') {
     state.inChoreMode = false;
     starCounter.style.display = 'none';
     explorerBtn.style.display = 'inline-flex';
+    loadStats();
+    loadParentKids();
   } else {
     // Kid screens (base, chore, arcade)
     starCounter.style.display = 'inline-flex';
@@ -293,16 +300,16 @@ async function loadKids() {
     const res = await fetch('/api/kids');
     const data = await res.json();
     state.kids = Array.isArray(data) && data.length > 0 ? data : [
-      { id: 1, name: 'Buri', stars: 25, color: '#6B5BFF', avatar: 'assets/popo_waving.png' },
-      { id: 2, name: 'Leo', stars: 15, color: '#8DBD61', avatar: 'assets/popo_backpack.png' }
+      { id: 1, name: 'Aiman', stars: 25, color: '#70459E', avatar: 'assets/mascot popo/mascot poses/09-welcome-wave.png' },
+      { id: 2, name: 'Sara', stars: 15, color: '#5BBF72', avatar: 'assets/mascot popo/mascot poses/12-peek.png' }
     ];
     renderKidsGateway();
     renderTemplatesList();
   } catch (err) {
     console.error('Failed to load kids', err);
     state.kids = [
-      { id: 1, name: 'Buri', stars: 25, color: '#6B5BFF', avatar: 'assets/popo_waving.png' },
-      { id: 2, name: 'Leo', stars: 15, color: '#8DBD61', avatar: 'assets/popo_backpack.png' }
+      { id: 1, name: 'Aiman', stars: 25, color: '#70459E', avatar: 'assets/mascot popo/mascot poses/09-welcome-wave.png' },
+      { id: 2, name: 'Sara', stars: 15, color: '#5BBF72', avatar: 'assets/mascot popo/mascot poses/12-peek.png' }
     ];
     renderKidsGateway();
     renderTemplatesList();
@@ -328,13 +335,16 @@ function renderKidsGateway() {
   grid.innerHTML = '';
   if (empty) empty.style.display = state.kids.length === 0 ? 'block' : 'none';
 
-  state.kids.forEach(kid => {
+  const avatarColors = ['#B3A2E2', '#FFC9D6', '#C5B5FB', '#FFF4DA'];
+
+  state.kids.forEach((kid, idx) => {
     const card = document.createElement('div');
     card.className = 'kid-card';
     card.onclick = () => selectKid(kid);
+    const bgCircle = avatarColors[idx % avatarColors.length];
     card.innerHTML = `
-      <div class="kid-avatar-wrap" style="border-color: ${kid.color || '#8dbd61'}">
-        <img src="${kid.avatar || 'assets/popo_mascot.png'}" alt="${esc(kid.name)}">
+      <div class="kid-avatar-wrap" style="background-color: ${bgCircle};">
+        <img src="${kid.avatar || 'assets/mascot popo/mascot poses/09-welcome-wave.png'}" alt="${esc(kid.name)}">
       </div>
       <div class="kid-name">${esc(kid.name)}</div>
       <div class="kid-card-stars">⭐ ${kid.stars} Stars</div>
@@ -342,14 +352,16 @@ function renderKidsGateway() {
     grid.appendChild(card);
   });
 
-  // Add Kid card for parent access
+  // Add Kid card for parent access (Rafa's Figma Style)
   const addCard = document.createElement('div');
   addCard.className = 'kid-card add-kid-card';
   addCard.onclick = () => openPinModal('add_kid');
   addCard.innerHTML = `
-    <span style="font-size: 38px; margin-bottom: 8px;">➕</span>
-    <span style="font-weight: 700; font-size: 16px;">Add Cadet</span>
-    <span style="font-size: 12px; color: var(--text-muted);">(Parent PIN required)</span>
+    <div class="kid-avatar-wrap" style="background-color: #ECE8FD; border: 2px dashed #C9BAF0; display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 38px;">➕</span>
+    </div>
+    <div class="kid-name" style="font-size: 20px;">Add Cadet</div>
+    <div class="kid-card-stars" style="background: #F8F6FF; color: #5A5478; border-color: #C9BAF0;">Parent PIN</div>
   `;
   grid.appendChild(addCard);
 }
@@ -1348,15 +1360,16 @@ function switchParentTab(tabName) {
 async function loadStats() {
   const grid = $id('statsGrid');
   if (!grid) return;
+  const num = (v) => (v != null && !isNaN(v) ? Number(v) : 0);
   try {
     const res = await fetch('/api/stats');
     const st = await res.json();
     const cards = [
-      ['📥', (st && st.pendingApprovals != null ? st.pendingApprovals : 0), 'waiting for approval'],
-      ['✅', (st && st.completedThisWeek != null ? st.completedThisWeek : 0), 'missions this week'],
-      ['⭐', (st && st.starsAwardedThisWeek != null ? st.starsAwardedThisWeek : 0), 'stars awarded this week'],
-      ['🚨', (st && st.distractionsToday != null ? st.distractionsToday : 0), 'left-app events today'],
-      ['🎁', (st && st.pendingRewardClaims != null ? st.pendingRewardClaims : 0), 'rewards to grant']
+      ['📥', num(st && st.pendingApprovals), 'waiting for approval'],
+      ['✅', num(st && (st.completedThisWeek != null ? st.completedThisWeek : st.completedChores)), 'missions this week'],
+      ['⭐', num(st && (st.starsAwardedThisWeek != null ? st.starsAwardedThisWeek : st.totalStarsAwarded)), 'stars awarded this week'],
+      ['🚨', num(st && st.distractionsToday), 'left-app events today'],
+      ['🎁', num(st && st.pendingRewardClaims), 'rewards to grant']
     ];
     grid.innerHTML = cards.map(c => `<div class="stat-card"><div class="num">${c[0]} ${c[1]}</div><div class="lbl">${c[2]}</div></div>`).join('');
   } catch (e) {
@@ -3671,15 +3684,25 @@ function openChildInventory() {
 
   if (perksGrid) {
     perksGrid.innerHTML = `
-      <div class="inventory-card">
-        <div class="inventory-icon">🎮</div>
-        <div class="inventory-title">30m Screen Pass</div>
-        <div class="inventory-sub">Ready to use</div>
+      <div class="inventory-card" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 14px 18px; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="inventory-icon" style="min-height: 48px; width: 48px; height: 48px; border-radius: 50%; background: #FFF4DA; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 0;">🎮</div>
+          <div>
+            <div class="inventory-title" style="font-size: 16px; margin: 0;">30m Screen Pass</div>
+            <div class="inventory-sub" style="color: #6B6785; font-size: 13px;">Approved today</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="toast('Perk Activated! Show Commander to redeem.', 'star')" style="background: #8DBD61 !important; padding: 8px 18px; font-size: 14px; font-weight: 800; border-radius: 999px; box-shadow: 0 4px 12px rgba(141, 189, 97, 0.35); cursor: pointer;">Activate</button>
       </div>
-      <div class="inventory-card">
-        <div class="inventory-icon">🍦</div>
-        <div class="inventory-title">Ice Cream Trip</div>
-        <div class="inventory-sub">Earned perk</div>
+      <div class="inventory-card" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 14px 18px; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="inventory-icon" style="min-height: 48px; width: 48px; height: 48px; border-radius: 50%; background: #FFF4DA; display: flex; align-items: center; justify-content: center; font-size: 26px; margin-bottom: 0;">🍦</div>
+          <div>
+            <div class="inventory-title" style="font-size: 16px; margin: 0;">Ice Cream Trip</div>
+            <div class="inventory-sub" style="color: #6B6785; font-size: 13px;">Earned perk</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="toast('Perk Activated! Show Commander to redeem.', 'star')" style="background: #8DBD61 !important; padding: 8px 18px; font-size: 14px; font-weight: 800; border-radius: 999px; box-shadow: 0 4px 12px rgba(141, 189, 97, 0.35); cursor: pointer;">Activate</button>
       </div>
     `;
   }
@@ -3688,12 +3711,16 @@ function openChildInventory() {
     const unlocked = getKidUnlockedItems(state.currentKid.id);
     const allItems = [...WARDROBE_CATALOG.hats, ...WARDROBE_CATALOG.gear];
     wardrobeGrid.innerHTML = allItems.map(item => {
-      const isOwned = unlocked.includes(item.id) || item.price === 0;
+      const cost = item.cost != null ? item.cost : (item.price != null ? item.price : 0);
+      const isOwned = unlocked.includes(item.id) || cost === 0;
+      const iconHtml = item.icon
+        ? `<img src="${item.icon}" alt="${esc(item.name)}" class="inventory-item-thumb">`
+        : `<span style="font-size: 32px;">${item.iconEmoji || '🧢'}</span>`;
       return `
-        <div class="inventory-card" style="${isOwned ? 'border-color: var(--alien-green);' : 'opacity: 0.5;'}">
-          <div class="inventory-icon">${item.icon}</div>
+        <div class="inventory-card ${isOwned ? 'unlocked' : 'locked'}">
+          <div class="inventory-icon">${iconHtml}</div>
           <div class="inventory-title">${esc(item.name)}</div>
-          <div class="inventory-sub">${isOwned ? 'Unlocked' : item.price + ' ⭐'}</div>
+          <div class="inventory-sub">${isOwned ? '<span class="status-badge unlocked">✓ Unlocked</span>' : `<span class="status-badge cost">${cost} ⭐</span>`}</div>
         </div>
       `;
     }).join('');
