@@ -1313,6 +1313,28 @@ function switchParentTab(tabName) {
   const pane = document.getElementById(`tab-${tabName}`);
   if (tabBtn) tabBtn.classList.add('active');
   if (pane) pane.classList.add('active');
+
+  // Sync floating dock active state
+  const dockMap = {
+    inbox: 'dockParentHome',
+    assigner: 'dockParentMissions',
+    routines: 'dockParentRoutines',
+    rewards: 'dockParentPerks',
+    settings: 'dockParentSettings'
+  };
+  document.querySelectorAll('.parent-dock .dock-item').forEach(d => {
+    d.classList.remove('active');
+    d.style.background = 'transparent';
+    d.style.color = '#6B6190';
+  });
+  if (dockMap[tabName]) {
+    const dockBtn = document.getElementById(dockMap[tabName]);
+    if (dockBtn) {
+      dockBtn.classList.add('active');
+      dockBtn.style.background = '#70459E';
+      dockBtn.style.color = '#FFFFFF';
+    }
+  }
   if (tabName === 'inbox') loadParentInbox();
   if (tabName === 'assigner') { renderRoomPickerGrid(); fillCustomChoreKids(); loadParentChoresList(); }
   if (tabName === 'routines') renderRoutinesList();
@@ -3247,20 +3269,41 @@ function renderRoomPickerGrid() {
   if (!grid) return;
   grid.innerHTML = '';
 
+  const roomSvgMap = {
+    bedroom: 'assets/figma_ui/Btn card · Planet Bedroom.svg',
+    bathroom: 'assets/figma_ui/Btn card · Planet Bathroom.svg',
+    kitchen: 'assets/figma_ui/Btn card · Planet Kitchen.svg',
+    dining: 'assets/figma_ui/Btn card · Planet Dining.svg',
+    living: 'assets/figma_ui/Btn card · Planet Living Room.svg',
+    living_room: 'assets/figma_ui/Btn card · Planet Living Room.svg',
+    laundry: 'assets/figma_ui/Btn card · Planet Laundry.svg',
+    entryway: 'assets/figma_ui/Btn card · Planet Entryway.svg',
+    study: 'assets/figma_ui/Btn card · Planet Study.svg',
+    school_bag: 'assets/figma_ui/Btn card · Planet School Bag.svg',
+    playroom: 'assets/figma_ui/Btn card · Planet Playroom.svg',
+    shared_room: 'assets/figma_ui/Btn card · Planet Playroom.svg'
+  };
+
   state.templates.forEach(tpl => {
     const card = document.createElement('div');
     card.className = 'room-picker-card';
+    card.style.cursor = 'pointer';
+    card.style.background = '#FFFFFF';
+    card.style.border = '2px solid #C9BAF0';
+    card.style.borderRadius = '20px';
+    card.style.padding = '12px';
+    card.style.boxShadow = '0 6px 18px rgba(112, 69, 158, 0.06)';
+    card.style.textAlign = 'center';
+    card.style.transition = 'transform 0.2s, box-shadow 0.2s';
+    card.onclick = () => openRoomDetailModal(tpl.id);
+
+    const svgPath = roomSvgMap[tpl.id] || 'assets/figma_ui/Btn card · Planet Bedroom.svg';
+
     card.innerHTML = `
-      <div>
-        <div class="room-picker-icon">${tpl.icon || '🏠'}</div>
-        <div class="room-picker-name">${esc(tpl.room_name)}</div>
-        <div class="room-picker-sub">${esc(tpl.chore_title)}</div>
-        <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
-          • 5 ADHD Micro-Steps<br>
-          • Finish Goal: ${esc(tpl.finish_goal || 'Keep space tidy')}
-        </div>
-      </div>
-      <button class="btn-start-chore" style="margin-top: 14px; padding: 8px 14px; font-size: 14px;" onclick="openRoomDetailModal('${tpl.id}')">
+      <img src="${svgPath}" alt="${esc(tpl.room_name)}" style="width: 100%; border-radius: 14px; pointer-events: none; margin-bottom: 8px;">
+      <div style="font-weight: 800; font-size: 15px; color: #1E1A3C;">${esc(tpl.chore_title || tpl.room_name)}</div>
+      <div style="font-size: 12px; color: #5A5478; margin-top: 4px;">• 5 ADHD Micro-Steps</div>
+      <button class="btn-start-chore" style="margin-top: 10px; padding: 8px 16px; font-size: 13px; width: 100%; border-radius: 999px;" onclick="event.stopPropagation(); openRoomDetailModal('${tpl.id}')">
         Inspect & Deploy 🚀
       </button>
     `;

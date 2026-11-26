@@ -65,30 +65,30 @@
           The ADHD-friendly visual chore companion. Step by step, visual guides, zero overwhelm, and real-world star rewards!
         </p>
 
-        <div class="role-select-grid">
-          <!-- Cadet Explorer Card -->
-          <div class="role-card cadet" id="roleCadetCard">
-            <div class="role-icon-box">🚀</div>
-            <h2 class="role-title">Cadet Explorer</h2>
-            <p class="role-desc">
-              Jump into your Space Base! Complete bite-sized visual chores with Popo, unlock hats & gear, and earn shiny stars.
-            </p>
-            <div class="role-action-pill">Enter Space Base 🌟</div>
-            <button type="button" class="aux-btn" onclick="event.stopPropagation(); openChildQrScanner();" style="margin-top: 10px; width: 100%; border-color: var(--alien-mint); color: var(--alien-mint); font-size: 13px; font-weight: 700; padding: 8px;">
-              <span>📷</span> Scan Parent's Phone QR (1.3c)
-            </button>
+        <h1 class="splash-title" style="margin-top: 10px; font-size: 28px; font-weight: 800; color: #1E1A3C;">Who’s using CanDo!?</h1>
+        <p class="splash-subtitle" style="font-size: 15px; color: #5A5478; margin-bottom: 24px;">Pick your role. You can switch later.</p>
+
+        <div class="role-select-grid figma-role-grid" style="display: flex; justify-content: center; gap: 16px; max-width: 440px; margin: 0 auto 20px; flex-wrap: nowrap;">
+          <!-- Commander Card (1.0 Role Select) -->
+          <div class="role-card parent" id="roleParentCard" title="Commander · Parent Mission Control" style="flex: 1; min-width: 140px; max-width: 190px; padding: 12px; cursor: pointer; border-radius: 24px; border: 2px solid #C9BAF0; background: #FFFFFF; box-shadow: 0 8px 24px rgba(112,69,158,0.08); transition: transform 0.2s;">
+            <img src="assets/figma_ui/Btn card · Commander.svg" alt="Commander · Parent Mission Control" style="width: 100%; height: auto; pointer-events: none; border-radius: 16px;">
           </div>
 
-          <!-- Parent HQ Card -->
-          <div class="role-card parent" id="roleParentCard">
-            <div class="role-icon-box">🛡️</div>
-            <h2 class="role-title">Parent HQ</h2>
-            <p class="role-desc">
-              Parent Command Center. Assign 5-step room routines, review photo proofs, manage star rewards, and monitor live alerts.
-            </p>
-            <div class="role-action-pill">Parent Command Center 🔒</div>
+          <!-- Cadet Card (1.0 Role Select) -->
+          <div class="role-card cadet" id="roleCadetCard" title="Cadet · Kid Spaceship Hub" style="flex: 1; min-width: 140px; max-width: 190px; padding: 12px; cursor: pointer; border-radius: 24px; border: 2px solid #C9BAF0; background: #FFFFFF; box-shadow: 0 8px 24px rgba(112,69,158,0.08); transition: transform 0.2s;">
+            <img src="assets/figma_ui/Btn card · Cadet.svg" alt="Cadet · Kid Spaceship Hub" style="width: 100%; height: auto; pointer-events: none; border-radius: 16px;">
           </div>
         </div>
+
+        <!-- Starter Pack Banner (1.0 Role Select) -->
+        <div class="starter-pack-card" style="display: flex; align-items: center; gap: 12px; background: #FFFFFF; border: 1.5px solid #C9BAF0; border-radius: 18px; padding: 12px 18px; max-width: 400px; width: 100%; margin: 0 auto 14px; box-shadow: 0 6px 18px rgba(112,69,158,0.06); text-align: left;">
+          <span style="font-size: 24px;">🎁</span>
+          <div style="font-size: 14px; color: #1E1A3C;"><b>Starter Pack:</b> 1 chore + 1 perk are added for you.</div>
+        </div>
+
+        <button type="button" class="aux-btn" onclick="event.stopPropagation(); openChildQrScanner();" style="max-width: 400px; width: 100%; margin: 0 auto; border-radius: 999px; font-size: 14px; font-weight: 700; padding: 10px 18px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <span>📷</span> <span>Scan Parent's Phone QR (1.3c)</span>
+        </button>
 
         <div style="font-size: 14px; color: var(--text-muted);">
           <span>Cosmic Safe Zone • ADHD & Neurodivergent-first visual chunking • 100% Kid-Safe</span>
@@ -132,7 +132,7 @@
         <!-- Header & Space Base Room Customizer -->
         <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <h2 id="baseKidName" style="font-size: 26px; font-weight: 800; color: #fff;">Space Base</h2>
+            <h2 id="baseKidName" style="font-size: 26px; font-weight: 800; color: #1E1A3C;">Space Base</h2>
             <span class="base-mascot-badge" id="baseWearingBadge" style="display: inline-flex;">Wearing: Standard Cadet Suit</span>
           </div>
           <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
@@ -209,6 +209,22 @@
           </div>
         </div>
 
+
+        <!-- Floating Kid Bottom Navigation Dock (Figma 3.1 Kids Home) -->
+        <nav class="floating-bottom-dock kid-dock" aria-label="Kid Navigation" style="position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 412px; background: #FFFFFF; border: 1.5px solid #E6E0F5; border-radius: 36px; box-shadow: 0 10px 30px rgba(112,69,158,0.12); display: flex; align-items: center; justify-content: space-around; padding: 6px 10px; z-index: 950;">
+          <button type="button" class="dock-item active" onclick="showScreen('base')" style="display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #70459E; border: none; color: #FFFFFF; font-weight: 700; font-size: 14px; cursor: pointer;">
+            <span style="font-size: 18px;">🏠</span>
+            <span>Home</span>
+          </button>
+          <button type="button" class="dock-item" onclick="openRewardsModal()" style="display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: transparent; border: none; color: #6B6190; font-weight: 700; font-size: 14px; cursor: pointer;">
+            <span style="font-size: 18px;">⭐</span>
+            <span>Rewards</span>
+          </button>
+          <button type="button" class="dock-item" onclick="openPinModal('open_parent')" style="display: flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: transparent; border: none; color: #6B6190; font-weight: 700; font-size: 14px; cursor: pointer;">
+            <span style="font-size: 18px;">🔒</span>
+            <span>Parent HQ</span>
+          </button>
+        </nav>
       </div>
     </section>
 
@@ -426,7 +442,7 @@
           <div style="display: flex; align-items: center; gap: 12px;">
             <span style="font-size: 32px;">🚨</span>
             <div>
-              <div style="font-weight: 800; font-size: 16px; color: #fff;" id="sosBannerTitle">Cadet Needs Help!</div>
+              <div style="font-weight: 800; font-size: 16px; color: #1E1A3C;" id="sosBannerTitle">Cadet Needs Help!</div>
               <div style="font-size: 13px; color: #ffb1c3;" id="sosBannerSub">Cadet requested Commander assistance during active mission.</div>
             </div>
           </div>
@@ -439,7 +455,7 @@
         <div class="telemetry-bar" id="telemetryBar">
           <div style="display: flex; align-items: center; gap: 10px;">
             <span class="pulse-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--alien-green); box-shadow: 0 0 10px var(--alien-green);"></span>
-            <span style="font-size: 14px; font-weight: 700; color: #fff;" id="telemetryStatus">Mission Telemetry: Cadet Buri is ready at Space Base</span>
+            <span style="font-size: 14px; font-weight: 700; color: #1E1A3C;" id="telemetryStatus">Mission Telemetry: Cadet Buri is ready at Space Base</span>
           </div>
           <div style="display: flex; gap: 12px; font-size: 13px; color: var(--text-muted);">
             <span>⚡ Mode: <b id="telemetryMode" style="color: var(--alien-green);">Standard</b></span>
@@ -495,7 +511,7 @@
             </div>
             <div class="inbox-list" id="parentInboxList"></div>
             <!-- 2.6e Inbox All Clear Empty State -->
-            <div id="inboxEmptyState" style="display: none; text-align: center; padding: 40px 20px; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px dashed rgba(255,255,255,0.1);">
+            <div id="inboxEmptyState" style="display: none; text-align: center; padding: 40px 20px; background: #F8F6FF; border-radius: 16px; border: 1.5px dashed #C9BAF0;">
               <img src="assets/mascot popo/mascot poses/09-welcome-wave.png" style="width: 120px; margin-bottom: 12px;" alt="Popo All Clear">
               <h3 style="font-size: 18px; color: var(--star-gold);">Inbox All Clear! 🌟</h3>
               <p style="color: var(--text-muted); font-size: 14px;">No chores waiting for review. Cadets are free to play in the Cosmic Arcade!</p>
@@ -656,7 +672,7 @@
             </div>
 
             <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px;">
-              <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #fff;">Household Rooms Completed (Bite-Sized Progress)</h4>
+              <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #1E1A3C;">Household Rooms Completed (Bite-Sized Progress)</h4>
               <div id="reportRoomsChart" style="display: flex; flex-direction: column; gap: 10px;"></div>
             </div>
           </div>
@@ -1046,12 +1062,12 @@
 
         <div id="rdSafetyNote" style="display: none; background: rgba(255, 182, 68, 0.12); border: 1px solid var(--star-gold); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: var(--star-gold);"></div>
 
-        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #fff;">2.1m Pre-Chunked Micro-Steps (ADHD Sequence):</h4>
+        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1E1A3C;">2.1m Pre-Chunked Micro-Steps (ADHD Sequence):</h4>
         <div id="rdStepsList" style="max-height: 240px; overflow-y: auto; margin-bottom: 16px;"></div>
 
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 16px 0;">
 
-        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #fff;">2.2 Deploy Mission to Cadet:</h4>
+        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1E1A3C;">2.2 Deploy Mission to Cadet:</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
           <div>
             <label class="form-label" style="font-size: 12px;">Select Cadet</label>
@@ -1092,7 +1108,7 @@
         </div>
 
         <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px;">
-          <div style="font-weight: 800; font-size: 16px; color: #fff;" id="prTitle">Bedroom - Reset Your Room</div>
+          <div style="font-weight: 800; font-size: 16px; color: #1E1A3C;" id="prTitle">Bedroom - Reset Your Room</div>
           <div style="font-size: 13px; color: var(--text-muted); margin-top: 2px;" id="prCadetMeta">Submitted by Cadet Buri • 10 Stars Bounty</div>
         </div>
 
@@ -1186,12 +1202,12 @@
           </button>
         </div>
 
-        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #fff;">Active Perk Passes (Ready to Redeem)</h4>
+        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1E1A3C;">Active Perk Passes (Ready to Redeem)</h4>
         <div id="inventoryPerksGrid" class="inventory-grid" style="margin-bottom: 18px;">
           <!-- Injected dynamically -->
         </div>
 
-        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #fff;">Unlocked Wardrobe Outfits & Hats</h4>
+        <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #1E1A3C;">Unlocked Wardrobe Outfits & Hats</h4>
         <div id="inventoryWardrobeGrid" class="inventory-grid">
           <!-- Injected dynamically -->
         </div>
@@ -1250,7 +1266,7 @@
         <div id="pairingExpiredBox" style="display: none; background: rgba(244, 112, 142, 0.15); border: 1px solid var(--cosmic-pink); border-radius: 14px; padding: 16px; margin-bottom: 14px; text-align: center;">
           <div style="font-size: 28px; margin-bottom: 4px;">⚠️</div>
           <div style="font-weight: 800; font-size: 15px; color: var(--cosmic-pink);">QR Token Expired! (1.3d Target Lost)</div>
-          <div style="font-size: 13px; color: #fff; margin-top: 4px; margin-bottom: 12px;">
+          <div style="font-size: 13px; color: #1E1A3C; margin-top: 4px; margin-bottom: 12px;">
             The 60-second security window ended. Single-use tokens expire to keep your family safe.
           </div>
           <button class="btn-start-chore" onclick="generateNewPairingToken()" style="padding: 8px 18px; font-size: 13px;">
@@ -1262,7 +1278,7 @@
         <div id="pairingClaimedBox" style="display: none; background: rgba(141, 189, 97, 0.2); border: 1px solid var(--alien-green); border-radius: 14px; padding: 16px; margin-bottom: 14px; text-align: center;">
           <div style="font-size: 32px; margin-bottom: 4px;">🎉</div>
           <div style="font-weight: 800; font-size: 16px; color: var(--alien-green);">1.3e Paired Successfully!</div>
-          <div id="pairingClaimedMessage" style="font-size: 13px; color: #fff; margin-top: 4px;">Cadet device is now bound to your parent account!</div>
+          <div id="pairingClaimedMessage" style="font-size: 13px; color: #1E1A3C; margin-top: 4px;">Cadet device is now bound to your parent account!</div>
         </div>
 
       </div>
@@ -1341,7 +1357,7 @@
       <img src="assets/mascot popo/mascot poses/09-welcome-wave.png" alt="Popo">
       <div>
         <div style="font-weight: 800; font-size: 17px; color: var(--star-gold);">Welcome back, Cadet! 🚀</div>
-        <div style="font-size: 14px; color: #fff;">Popo kept your mission spot warm! Ready to finish up?</div>
+        <div style="font-size: 14px; color: #1E1A3C;">Popo kept your mission spot warm! Ready to finish up?</div>
       </div>
     </div>
 

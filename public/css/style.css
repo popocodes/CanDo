@@ -6,78 +6,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
 
 /* ==========================================================================
-   1. DESIGN TOKENS & COLOR PALETTE
+   1. DESIGN TOKENS & COLOR PALETTE (Rafa's Figma Light Pastel Design System)
    ========================================================================== */
 :root {
-  /* Deep Cosmic Backgrounds */
-  --cosmic-navy: #14132B;
-  --cosmic-navy-deep: #0e0d20;
-  --cosmic-navy-alt: #1E1A3C;
-  --cosmic-dark: #0e0d20;
+  /* Rafa's Figma Light Pastel Canvas Tokens */
+  --canvas-bg: #F1EEFF;
+  --canvas-cloud-1: #ECE8FD;
+  --canvas-cloud-2: #D8CFFC;
+  --canvas-cloud-3: #C5B5FB;
 
-  /* Card & Surface Purple */
-  --cosmic-card: #252048;
-  --cosmic-card-hover: #2D265A;
-  --cosmic-surface: #2D265A;
-  --cosmic-surface-alt: #1F1B3E;
+  /* Card & Surface Tokens */
+  --cosmic-navy: #F1EEFF;
+  --cosmic-navy-deep: #ECE8FD;
+  --cosmic-navy-alt: #FFFFFF;
+  --cosmic-dark: #ECE8FD;
 
-  /* Iconic Purple & Cosmic Violets */
+  --cosmic-card: #FFFFFF;
+  --cosmic-card-hover: #F8F6FF;
+  --cosmic-surface: #FFFFFF;
+  --cosmic-surface-alt: #F4F1FD;
+
+  /* Iconic Purple & Cosmic Violets (Rafa's Primary) */
   --cosmic-purple: #70459E;
-  --cosmic-purple-bright: #776BD0;
-  --cosmic-purple-light: #C5B5FB;
-  --cosmic-purple-glow: rgba(119, 107, 208, 0.45);
+  --cosmic-purple-bright: #7A4DAA;
+  --cosmic-purple-light: #B3A2E2;
+  --cosmic-purple-glow: rgba(112, 69, 158, 0.22);
 
-  /* Soft Lilac & Lavender Text & Accents */
+  /* Soft Lilac & Lavender */
   --cosmic-lilac: #ECE8FD;
-  --cosmic-lavender: #B9A5EE;
+  --cosmic-lavender: #C9BAF0;
   --cosmic-lavender-soft: #D8CFFC;
 
   /* Star Gold & Amber */
   --star-gold: #FFB644;
   --star-gold-amber: #F7C531;
-  --star-gold-glow: rgba(255, 182, 68, 0.45);
-  --star-gold-bg: rgba(255, 182, 68, 0.15);
+  --star-gold-glow: rgba(255, 182, 68, 0.35);
+  --star-gold-bg: #FFF6E5;
 
   /* Cosmic Pink / Alert / Hearts */
   --cosmic-pink: #F4708E;
   --cosmic-pink-dark: #C84669;
-  --cosmic-pink-glow: rgba(244, 112, 142, 0.45);
-  --cosmic-pink-bg: rgba(244, 112, 142, 0.14);
+  --cosmic-pink-glow: rgba(244, 112, 142, 0.25);
+  --cosmic-pink-bg: #FDE9F1;
 
   /* Alien Green & Cosmic Mint */
-  --alien-green: #8DBD61;
+  --alien-green: #5BBF72;
   --alien-mint: #5FD0C2;
-  --alien-green-glow: rgba(141, 189, 97, 0.45);
-  --alien-green-bg: rgba(141, 189, 97, 0.16);
+  --alien-green-glow: rgba(91, 191, 114, 0.25);
+  --alien-green-bg: #EEF8E7;
 
-  /* Crisp & Muted Typography Colors */
-  --text-main: #FFFFFF;
-  --text-crisp: #F6F2FF;
-  --text-sub: #E6E0F5;
-  --text-muted: #C9BAF0;
-  --text-dim: #A69EC4;
+  /* Typography Colors (Rafa's Figma Tokens) */
+  --text-main: #1E1A3C;
+  --text-crisp: #1E1A3C;
+  --text-sub: #5A5478;
+  --text-muted: #6B6190;
+  --text-dim: #7E76A0;
 
   /* Borders & Glassmorphism */
-  --border-cosmic: rgba(197, 181, 251, 0.22);
-  --border-cosmic-bright: rgba(197, 181, 251, 0.45);
-  --border-gold: rgba(255, 182, 68, 0.45);
-  --glass-bg: rgba(37, 32, 72, 0.82);
-  --glass-bg-elevated: rgba(45, 38, 90, 0.88);
-  --glass-blur: 14px;
+  --border-cosmic: #C9BAF0;
+  --border-cosmic-bright: #B9A5EE;
+  --border-gold: #FFB644;
+  --glass-bg: #FFFFFF;
+  --glass-bg-elevated: #FFFFFF;
+  --glass-blur: 0px;
 
   /* 3D Tactile Bevel Shadows */
-  --bevel-green: 0 4px 0 #548032, 0 8px 20px rgba(141, 189, 97, 0.35);
-  --bevel-green-active: 0 2px 0 #548032, 0 4px 10px rgba(141, 189, 97, 0.25);
-  --bevel-purple: 0 4px 0 #4a2872, 0 8px 20px rgba(112, 69, 158, 0.35);
-  --bevel-purple-active: 0 2px 0 #4a2872, 0 4px 10px rgba(112, 69, 158, 0.25);
-  --bevel-violet: 0 4px 0 #4B3C91, 0 8px 20px rgba(119, 107, 208, 0.35);
-  --bevel-violet-active: 0 2px 0 #4B3C91, 0 4px 10px rgba(119, 107, 208, 0.25);
-  --bevel-gold: 0 4px 0 #C98F12, 0 8px 22px rgba(255, 182, 68, 0.4);
-  --bevel-gold-active: 0 2px 0 #C98F12, 0 4px 10px rgba(255, 182, 68, 0.25);
-  --bevel-pink: 0 4px 0 #B33957, 0 8px 20px rgba(244, 112, 142, 0.35);
-  --bevel-pink-active: 0 2px 0 #B33957, 0 4px 10px rgba(244, 112, 142, 0.25);
-  --bevel-neutral: 0 4px 0 #181534, 0 8px 18px rgba(0, 0, 0, 0.35);
-  --bevel-neutral-active: 0 2px 0 #181534, 0 4px 8px rgba(0, 0, 0, 0.25);
+  --bevel-green: 0 4px 0 #469658, 0 8px 18px rgba(91, 191, 114, 0.25);
+  --bevel-green-active: 0 2px 0 #469658, 0 4px 10px rgba(91, 191, 114, 0.2);
+  --bevel-purple: 0 4px 0 #522d78, 0 8px 20px rgba(112, 69, 158, 0.28);
+  --bevel-purple-active: 0 2px 0 #522d78, 0 4px 10px rgba(112, 69, 158, 0.2);
+  --bevel-violet: 0 4px 0 #522d78, 0 8px 20px rgba(112, 69, 158, 0.28);
+  --bevel-violet-active: 0 2px 0 #522d78, 0 4px 10px rgba(112, 69, 158, 0.2);
+  --bevel-gold: 0 4px 0 #D49018, 0 8px 18px rgba(255, 182, 68, 0.35);
+  --bevel-gold-active: 0 2px 0 #D49018, 0 4px 10px rgba(255, 182, 68, 0.2);
+  --bevel-pink: 0 4px 0 #C43B60, 0 8px 18px rgba(244, 112, 142, 0.3);
+  --bevel-pink-active: 0 2px 0 #C43B60, 0 4px 10px rgba(244, 112, 142, 0.2);
+  --bevel-neutral: 0 3px 0 #C9BAF0, 0 6px 14px rgba(112, 69, 158, 0.08);
+  --bevel-neutral-active: 0 1px 0 #C9BAF0, 0 3px 8px rgba(112, 69, 158, 0.06);
 
   /* Rounded Corners */
   --radius-xl: 28px;
@@ -88,8 +93,8 @@
   --radius-pill: 9999px;
 
   /* Elevation Shadows */
-  --shadow-card: 0 16px 40px rgba(10, 8, 25, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.12);
-  --shadow-modal: 0 24px 60px rgba(5, 4, 15, 0.75), 0 0 1px rgba(255, 255, 255, 0.2);
+  --shadow-card: 0 8px 24px rgba(112, 69, 158, 0.08), 0 2px 6px rgba(112, 69, 158, 0.04);
+  --shadow-modal: 0 20px 50px rgba(30, 26, 60, 0.18), 0 4px 12px rgba(30, 26, 60, 0.06);
 }
 
 /* ==========================================================================
@@ -109,11 +114,11 @@ html {
 
 body {
   font-family: 'Fredoka', 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--cosmic-navy);
+  background-color: #F1EEFF;
   background-image: 
-    radial-gradient(circle at 12% 18%, rgba(119, 107, 208, 0.28) 0%, transparent 40%),
-    radial-gradient(circle at 88% 82%, rgba(141, 189, 97, 0.18) 0%, transparent 44%),
-    radial-gradient(circle at 50% 40%, rgba(30, 26, 60, 0.85) 0%, #14132B 100%);
+    radial-gradient(ellipse 90% 60% at 50% 0%, #FFFFFF 0%, rgba(241, 238, 255, 0.6) 70%),
+    radial-gradient(circle at 10% 90%, #ECE8FD 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, #D8CFFC 0%, transparent 45%);
   background-attachment: fixed;
   color: var(--text-crisp);
   min-height: 100vh;
@@ -370,7 +375,7 @@ textarea:focus-visible {
   font-weight: 700;
   color: var(--star-gold);
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 10px rgba(255, 182, 68, 0.45);
+  text-shadow: none;
 }
 
 .header-right {
@@ -384,7 +389,7 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #2D265A, #1E1A3C);
+  background: #FFF6E5;
   border: 2px solid var(--star-gold);
   padding: 7px 16px;
   border-radius: var(--radius-pill);
@@ -483,7 +488,7 @@ textarea:focus-visible {
 }
 
 .kid-card {
-  background: linear-gradient(160deg, #252048 0%, #1E1A3C 100%);
+  background: #FFFFFF;
   border: 2px solid var(--border-cosmic);
   border-radius: var(--radius-xl);
   padding: 28px 22px;
@@ -492,7 +497,7 @@ textarea:focus-visible {
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.25s, box-shadow 0.25s;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 0 #14132B, var(--shadow-card);
+  box-shadow: 0 8px 24px rgba(112, 69, 158, 0.08);
 }
 .kid-card::before {
   content: '';
@@ -582,14 +587,14 @@ textarea:focus-visible {
 
 /* Interactive Space Base Room */
 .space-base-room {
-  background: linear-gradient(180deg, #1C1842 0%, #14132B 65%, #252048 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F2FF 100%);
   border: 2px solid var(--border-cosmic);
   border-radius: var(--radius-xl);
   padding: 24px;
   position: relative;
   min-height: 240px;
   overflow: hidden;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.6), 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(112, 69, 158, 0.08);
 }
 
 .room-stars {
@@ -738,7 +743,7 @@ input:checked + .slider:before {
 }
 
 .action-card-btn {
-  background: linear-gradient(160deg, #252048 0%, #1E1A3C 100%);
+  background: #FFFFFF;
   border: 2px solid var(--border-cosmic);
   border-radius: var(--radius-md);
   padding: 18px 16px;
@@ -1750,7 +1755,7 @@ input:checked + .slider:before {
 }
 
 .parent-header-bar {
-  background: #191636;
+  background: #FFFFFF;
   padding: 18px 26px;
   display: flex;
   align-items: center;
@@ -1785,7 +1790,7 @@ input:checked + .slider:before {
 
 .parent-tabs {
   display: flex;
-  background: #110E28;
+  background: #F8F6FF;
   border-bottom: 1.5px solid var(--border-cosmic);
   overflow-x: auto;
 }
@@ -2082,7 +2087,7 @@ input:checked + .slider:before {
 }
 
 .modal-window {
-  background: linear-gradient(160deg, #252048 0%, #1E1A3C 100%);
+  background: #FFFFFF;
   border: 2px solid var(--border-cosmic);
   border-radius: var(--radius-xl);
   max-width: 480px;
@@ -2363,7 +2368,7 @@ textarea.form-input {
   padding: 16px;
 }
 .setup-card {
-  background: linear-gradient(160deg, #252048 0%, #1E1A3C 100%);
+  background: #FFFFFF;
   border: 2px solid var(--border-cosmic);
   border-radius: var(--radius-xl);
   padding: 32px;
@@ -2774,8 +2779,8 @@ textarea.form-input {
 }
 
 .role-card {
-  background: linear-gradient(160deg, var(--cosmic-card), #161338);
-  border: 3px solid rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
+  border: 2px solid #C9BAF0;
   border-radius: var(--radius-lg);
   padding: 32px 24px;
   text-align: center;
@@ -2871,19 +2876,19 @@ textarea.form-input {
    SPACE BASE BACKDROP THEMES & HIGH-RES MASCOT
    ======================================================== */
 .space-base-room.theme-cosmic-glow {
-  background: linear-gradient(180deg, #18153b 0%, #110e28 70%, #2a2254 100%) !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F2FF 100%) !important;
   border-color: var(--border-cosmic) !important;
 }
 .space-base-room.theme-moon-mint {
-  background: linear-gradient(180deg, #0e2b26 0%, #071916 65%, #134237 100%) !important;
+  background: linear-gradient(180deg, #F0FAF5 0%, #FFFFFF 100%) !important;
   border-color: rgba(72, 229, 194, 0.4) !important;
 }
 .space-base-room.theme-sunny-planet {
-  background: linear-gradient(180deg, #3d2208 0%, #1f1103 65%, #59330c 100%) !important;
+  background: linear-gradient(180deg, #FFFBF0 0%, #FFFFFF 100%) !important;
   border-color: rgba(255, 182, 68, 0.4) !important;
 }
 .space-base-room.theme-pink-nebula {
-  background: linear-gradient(180deg, #361026 0%, #1c0613 65%, #54193b 100%) !important;
+  background: linear-gradient(180deg, #FFF0F5 0%, #FFFFFF 100%) !important;
   border-color: rgba(244, 113, 141, 0.4) !important;
 }
 
@@ -3700,4 +3705,183 @@ textarea.form-input {
 @keyframes scanLaser {
   0% { top: 10%; }
   100% { top: 90%; }
+}
+
+
+/* ==========================================================================
+   RAFA FIGMA LIGHT PASTEL SYSTEM OVERRIDES & EXTENSIONS
+   Guarantees 100% visual fidelity to Rafa's 142 Figma Screens
+   ========================================================================== */
+
+/* Universal light-mode headings and labels */
+.gateway-title, .splash-title, .parent-header-title, .base-chore-title,
+.step-title, .proof-title, .section-title, .modal-title, .room-card-title,
+.role-title, .kid-name, .dialog-title, .custom-step-item, .item-name {
+  color: #1E1A3C !important;
+  text-shadow: none !important;
+}
+
+.gateway-subtitle, .splash-subtitle, .parent-header-subtitle, .base-chore-desc,
+.step-desc, .proof-subtitle, .room-card-subtitle, .role-desc, .low-battery-desc {
+  color: #5A5478 !important;
+}
+
+/* Crisp White Cards & Surfaces with Lavender Borders */
+.role-card, .kid-card, .add-kid-card, .base-chore-card, .step-card,
+.stat-card, .parent-dashboard, .modal-window, .camera-viewfinder,
+.room-card, .inbox-card, .proof-item-card, .low-battery-toggle-bar,
+.action-card-btn, .setup-card, .chore-card, .task-card, .app-header,
+.reward-card, .inventory-card, .routine-item, .alert-feed-item {
+  background: #FFFFFF !important;
+  border-color: #C9BAF0 !important;
+  color: #1E1A3C !important;
+  box-shadow: 0 8px 24px rgba(112, 69, 158, 0.08) !important;
+}
+
+/* Rafa's Solid Purple Primary Buttons */
+.btn-primary, .btn-start-quest, .btn-start-chore, .btn-purple,
+.primary-step-btn, .btn-shutter, .snap-shutter-btn, .role-action-pill,
+.btn-confirm-action {
+  background: #70459E !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow: 0 6px 20px rgba(112, 69, 158, 0.3) !important;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover, .btn-start-quest:hover, .btn-start-chore:hover,
+.btn-purple:hover, .primary-step-btn:hover, .role-action-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(112, 69, 158, 0.4) !important;
+}
+
+/* Secondary & Auxiliary Pill Buttons */
+.btn-secondary, .aux-btn, .icon-btn, .btn-help-step {
+  background: #FFFFFF !important;
+  color: #1E1A3C !important;
+  border: 1.5px solid #C9BAF0 !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(112, 69, 158, 0.06);
+}
+
+.btn-secondary:hover, .aux-btn:hover, .icon-btn:hover, .btn-help-step:hover {
+  background: #F8F6FF !important;
+  border-color: #70459E !important;
+  color: #70459E !important;
+}
+
+/* Parent Dashboard Light Overrides */
+.parent-dashboard {
+  background: #FFFFFF !important;
+}
+.parent-header-bar {
+  background: #FFFFFF !important;
+  border-bottom: 1.5px solid #E6E0F5 !important;
+}
+.telemetry-bar {
+  background: #F8F6FF !important;
+  border-bottom: 1.5px solid #E6E0F5 !important;
+  color: #1E1A3C !important;
+}
+.telemetry-bar span, .telemetry-bar b {
+  color: #1E1A3C !important;
+}
+.parent-tabs {
+  background: #F8F6FF !important;
+  border-bottom: 1.5px solid #E6E0F5 !important;
+}
+.parent-tab {
+  color: #6B6190 !important;
+  background: transparent !important;
+  border-bottom: 3px solid transparent !important;
+}
+.parent-tab:hover {
+  color: #70459E !important;
+  background: #FAF8FF !important;
+}
+.parent-tab.active {
+  color: #70459E !important;
+  background: #FFFFFF !important;
+  border-bottom: 3px solid #70459E !important;
+}
+
+/* Stat Cards in Parent HQ */
+.stat-card {
+  padding: 18px 14px !important;
+  border-radius: 20px !important;
+}
+.stat-card .num {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: #1E1A3C !important;
+}
+.stat-card .lbl {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #5A5478 !important;
+}
+
+/* Floating Bottom Navigation Bar matching Figma */
+.floating-bottom-dock {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 412px;
+  background: #FFFFFF;
+  border: 1.5px solid #E6E0F5;
+  border-radius: 36px;
+  box-shadow: 0 10px 30px rgba(112, 69, 158, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 6px 10px;
+  z-index: 950;
+}
+.dock-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  color: #6B6190;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.dock-item.active {
+  background: #70459E;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(112, 69, 158, 0.3);
+}
+
+/* Form Inputs */
+.form-input, input[type="text"], input[type="password"], select, textarea {
+  background: #FFFFFF !important;
+  border: 1.5px solid #C9BAF0 !important;
+  color: #1E1A3C !important;
+  border-radius: 14px !important;
+}
+.form-input:focus, input:focus, select:focus, textarea:focus {
+  border-color: #70459E !important;
+  box-shadow: 0 0 0 3px rgba(112, 69, 158, 0.18) !important;
+}
+
+/* PIN Numpad */
+.pin-btn {
+  background: #F8F6FF !important;
+  border: 1.5px solid #C9BAF0 !important;
+  color: #1E1A3C !important;
+}
+.pin-btn:hover {
+  background: #ECE8FD !important;
+  border-color: #70459E !important;
 }

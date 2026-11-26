@@ -809,15 +809,13 @@
       return jsonResponse({ success: true, totalStars: awardedStars });
     }
 
-    // /api/chores/:id/request-redo (2.6d Sent Back)
+    // /api/chores/:id/request-redo
     if (parts.length === 4 && parts[1] === 'chores' && parts[3] === 'request-redo') {
       var redoId = parseInt(parts[2], 10);
       var redoChores = getStorage('cando_offline_chores', []);
       var choreToRedo = redoChores.find(function(c) { return c.id === redoId; });
       if (choreToRedo) {
         choreToRedo.status = 'active';
-        choreToRedo.needs_touch_up = true;
-        choreToRedo.touch_up_note = body.note || 'Check one more small thing!';
         setStorage('cando_offline_chores', redoChores);
       }
       return jsonResponse({ success: true });
@@ -865,7 +863,7 @@
       }
     }
 
-    // /api/rewards/:id/redeem (5.3c & 5.3d Escrow)
+    // /api/rewards/:id/redeem
     if (parts.length === 4 && parts[1] === 'rewards' && parts[3] === 'redeem') {
       var rewId = parseInt(parts[2], 10);
       var kdList = getStorage('cando_offline_kids', []);
@@ -875,118 +873,8 @@
       if (kd && rw) {
         kd.stars = Math.max(0, (kd.stars || 0) - rw.star_cost);
         setStorage('cando_offline_kids', kdList);
-        var redList = getStorage('cando_offline_redemptions', []);
-        redList.unshift({
-          id: Date.now(),
-          kid_id: kd.id,
-          kid_name: kd.name,
-          title: rw.title,
-          star_cost: rw.star_cost,
-          status: 'pending',
-          created_at: new Date().toISOString()
-        });
-        setStorage('cando_offline_redemptions', redList);
       }
       return jsonResponse({ success: true, remainingStars: kd ? kd.stars : 0 });
-    }
-
-    // /api/redemptions (2.5 Perk Requests Queue)
-    if (parts.length >= 2 && parts[1] === 'redemptions') {
-      var redemptions = getStorage('cando_offline_redemptions', [
-        { id: 101, kid_id: 1, kid_name: 'Buri', title: '30 Mins iPad Game Time', star_cost: 20, status: 'pending', created_at: new Date().toISOString() }
-      ]);
-      if (parts.length === 2 && method === 'GET') {
-        return jsonResponse(redemptions);
-      }
-      if (parts.length === 4 && parts[3] === 'status' && (method === 'PUT' || method === 'POST')) {
-        var redId = parseInt(parts[2], 10);
-        var matchRed = redemptions.find(function(r) { return r.id === redId; });
-        if (matchRed) {
-          matchRed.status = 'granted';
-          setStorage('cando_offline_redemptions', redemptions);
-        }
-        return jsonResponse({ success: true });
-      }
-    }
-
-    
-    // /api/pairing/generate (1.3b Pairing QR)
-    if (parts.length === 3 && parts[1] === 'pairing' && parts[2] === 'generate') {
-      var kidList = getStorage('cando_offline_kids', []);
-      var kidId = body.kid_id || (kidList[0] ? kidList[0].id : 1);
-      var kid = kidList.find(function(k) { return String(k.id) === String(kidId); }) || kidList[0];
-      var rand = Math.random().toString(36).substring(2, 8).toUpperCase();
-      var token = 'CAN-' + rand;
-      var expiresAt = Date.now() + 60000;
-      var offlineTokens = getStorage('cando_offline_pairing_tokens', {});
-      offlineTokens[token] = {
-        token: token,
-        kid_id: kid.id,
-        kid_name: kid.name,
-        expires_at: expiresAt,
-        used: false,
-        status: 'pending'
-      };
-      setStorage('cando_offline_pairing_tokens', offlineTokens);
-      return jsonResponse({
-        success: true,
-        token: token,
-        code: token,
-        expires_in: 60,
-        expires_at: expiresAt,
-        cadet: { id: kid.id, name: kid.name, avatar: kid.avatar, color: kid.color }
-      });
-    }
-
-    // /api/pairing/status/:token
-    if (parts.length === 4 && parts[1] === 'pairing' && parts[2] === 'status') {
-      var checkToken = parts[3].toUpperCase();
-      var offTokens = getStorage('cando_offline_pairing_tokens', {});
-      var tokenData = offTokens[checkToken];
-      if (!tokenData || tokenData.expires_at < Date.now()) {
-        return jsonResponse({ status: 'expired' });
-      }
-      if (tokenData.used) {
-        return jsonResponse({ status: 'claimed', cadet: { id: tokenData.kid_id, name: tokenData.kid_name } });
-      }
-      return jsonResponse({
-        status: 'pending',
-        remaining_seconds: Math.max(0, Math.round((tokenData.expires_at - Date.now()) / 1000))
-      });
-    }
-
-    // /api/pairing/claim (1.3c Scan on Child Device & 1.3d Target Lost)
-    if (parts.length === 3 && parts[1] === 'pairing' && parts[2] === 'claim') {
-      var claimTok = String(body.token || '').trim().toUpperCase();
-      if (claimTok.startsWith('{')) {
-        try {
-          var p = JSON.parse(claimTok);
-          if (p.token) claimTok = p.token.toUpperCase();
-        } catch(e) {}
-      }
-      var tokensMap = getStorage('cando_offline_pairing_tokens', {});
-      var tData = tokensMap[claimTok];
-      if (!tData) {
-        return jsonResponse({ error: 'Invalid pairing token', code: 'INVALID_TOKEN' }, 404);
-      }
-      if (tData.expires_at < Date.now()) {
-        return jsonResponse({ error: 'QR Token expired (60s limit reached)', code: 'TARGET_LOST' }, 410);
-      }
-      if (tData.used) {
-        return jsonResponse({ error: 'QR Token already used', code: 'ALREADY_USED' }, 409);
-      }
-      tData.used = true;
-      tData.status = 'claimed';
-      setStorage('cando_offline_pairing_tokens', tokensMap);
-
-      var allKids = getStorage('cando_offline_kids', []);
-      var matchedKid = allKids.find(function(k) { return k.id === tData.kid_id; }) || {
-        id: tData.kid_id,
-        name: tData.kid_name,
-        stars: 10,
-        avatar: 'assets/popo_mascot.png'
-      };
-      return jsonResponse({ success: true, cadet: matchedKid });
     }
 
     // /api/settings/verify-pin
@@ -1009,20 +897,7 @@
 
     // /api/stats
     if (parts.length === 2 && parts[1] === 'stats') {
-      var chores = getStorage('cando_offline_chores', []);
-      var pending = chores.filter(function(c) { return c.status === 'pending_approval'; }).length;
-      var completed = chores.filter(function(c) { return c.status === 'completed'; }).length;
-      var stars = chores.filter(function(c) { return c.status === 'completed'; })
-        .reduce(function(sum, c) { return sum + (c.stars_reward || 10); }, 0);
-      var redemptions = getStorage('cando_offline_redemptions', []);
-      var pendingClaims = redemptions.filter(function(r) { return r.status === 'pending'; }).length;
-      return jsonResponse({
-        pendingApprovals: pending,
-        completedThisWeek: completed,
-        starsAwardedThisWeek: stars,
-        distractionsToday: 0,
-        pendingRewardClaims: pendingClaims
-      });
+      return jsonResponse({ completedChores: 12, totalStarsAwarded: 145, activeCadets: 2, proofPhotosCount: 8 });
     }
 
     // /api/alerts
@@ -1065,9 +940,7 @@
             if (!didRespond) {
               didRespond = true;
               clearTimeout(timer);
-              var ct = (res.headers && res.headers.get('content-type')) || '';
-              // Capacitor WebView returns 200 with text/html (index.html) for nonexistent api endpoints
-              if (res.ok && ct.indexOf('application/json') !== -1) {
+              if (res.ok) {
                 resolve(res);
               } else {
                 resolve(handleOfflineApi(urlStr, options));
