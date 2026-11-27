@@ -1,7 +1,7 @@
 {
   "appId": "com.cando.companion",
   "appName": "CanDo!",
-  "webDir": "public",
+  "webDir": "www",
   "android": {
     "allowMixedContent": true
   }

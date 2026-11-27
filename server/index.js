@@ -1,3 +1,5 @@
+// Optional settings (email, sign-in, payments) are read from .env. See SETUP.md.
+try { process.loadEnvFile(require('path').join(__dirname, '..', '.env')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -7,6 +9,10 @@ const { ROOM_TEMPLATES, DEFAULT_ROOM_ITEMS } = require('./choreTemplates');
 const os = require('os');
 const { run, get, all, initDb, assignTemplateChore } = require('./db');
 const ntfy = require('./ntfy');
+const v2 = require('./v2');
+const accounts = require('./accounts');
+const billing = require('./billing');
+const schedule = require('./schedule');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -968,13 +974,22 @@ app.post('/api/pairing/claim', async (req, res) => {
   }
 });
 
+// Redesigned app API
+v2.register(app, { broadcastEvent, requirePin });
+accounts.register(app);
+billing.register(app, { requirePin });
+
 // Fallback to index.html for SPA routes
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
 });
 
 // Initialize database and start listening
-initDb().then(() => {
+initDb().then(v2.migrate).then(accounts.migrate).then(() => {
+  schedule.start({ getPrefs: v2.getPrefs, localDate: v2.localDate, broadcast: broadcastEvent });
+  const purge = () => v2.purgeOldProofs().catch(err => console.warn('[privacy] cleanup failed:', err.message));
+  purge();
+  setInterval(purge, 60 * 60 * 1000);
   // Listen on all network interfaces so phones/tablets on the same Wi-Fi can connect
   app.listen(PORT, HOST, () => {
     console.log(`✨ CanDo! Server running on http://localhost:${PORT}`);

@@ -13,3 +13,11 @@ public/uploads/*
 run_serveo.sh
 gofile_*
 *CanDo! App UI Design.svg
+
+# Secrets and local copies
+.env
+cando.db.bak-*
+
+# Generated Android web bundle
+www/
+*.bak-*

@@ -2,7 +2,8 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const { ROOM_TEMPLATES, DEFAULT_REWARDS, DEFAULT_ROOM_ITEMS } = require('./choreTemplates');
 
-const dbPath = path.join(__dirname, '..', 'cando.db');
+// CANDO_DB lets you test against a copy without touching the real database
+const dbPath = process.env.CANDO_DB || path.join(__dirname, '..', 'cando.db');
 const db = new sqlite3.Database(dbPath);
 
 function run(sql, params = []) {

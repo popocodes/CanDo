@@ -19,13 +19,16 @@
   },
   "homepage": "https://github.com/popocodes/CanDo#readme",
   "dependencies": {
+    "@capacitor-community/text-to-speech": "^8.0.2",
     "@capacitor/android": "^8.6.2",
+    "@capacitor/app": "^8.1.2",
     "@capacitor/cli": "^8.6.2",
     "@capacitor/core": "^8.6.2",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "jsqr": "^1.4.0",
     "multer": "^2.4.0",
+    "nodemailer": "^10.6.1",
     "qrcode": "^1.5.4",
     "sqlite3": "^6.0.1"
   }
